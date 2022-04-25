@@ -1,4 +1,6 @@
 #백준 15686번 치킨배달
+#https://www.acmicpc.net/problem/15686
+
 n, m = map(int, input().split()) #도시크기 n, 남길 치킨 집 m
 
 city = []
