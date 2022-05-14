@@ -7,14 +7,14 @@ def sovle(grade):
   d = [0] * 101
 
   for i in range(1000):
-    d[grade[i]] += 1
+    d[grade[i]] += 1 #계수정렬
 
   max = 0
   result = 0
   for i in range(0, 101):
-    if d[-1-i] > max:
+    if d[-1-i] > max: #뒤에서 확인
       max = d[-1-i]
-      result = 101-1-i
+      result = 101-1-i #최빈수의 인덱스
 
   return result
   
