@@ -9,7 +9,7 @@ for i in range(T):
     n = int(input())
     farm = []
     for _ in range(n):
-        farm.append(input())
+        farm.append(input()) # 입력형식에 유의할 것
     price = 0
 
     for j in range(n // 2):
