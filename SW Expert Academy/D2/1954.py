@@ -14,7 +14,7 @@ for _ in range(T):
     x = 0
     y = 0
     idx = 0
-    for i in range(1, n * n +1):
+    for i in range(1, n * n + 1):
         arr[x][y] = i
         if y == n-1 and x == 0:
             idx += 1
