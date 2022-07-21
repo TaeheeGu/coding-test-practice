@@ -20,15 +20,17 @@ public class D2_1970 {
 			int n = Integer.parseInt(br.readLine());
 			System.out.println("#" + t);
 
-			int[] cnt = new int[8];
 			for (int i = 0; i < 8; i++) {
+				int cnt = 0;
 				int temp = n / change[i];
+				
 				if (temp >= 1) {
-					cnt[i] = temp;
+					cnt = temp;
 					n -= change[i] * temp;
 				}
+				System.out.print(cnt + " ");
 			}
-			System.out.println(Arrays.toString(cnt));
+			System.out.println();
 		}
 	}
 }
