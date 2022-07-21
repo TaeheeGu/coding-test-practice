@@ -1,6 +1,6 @@
 # coding-test-practice
 #### Python / Pypy3.7-V7.3.4 & Pycharm Community 2020.3.5
-#### Java / OpenJDK Azul Zulu 8.33.0.1
+#### Java / OpenJDK8 Azul Zulu 8.33.0.1 & Eclipse Java EE IDE 2018-09R
 
 ## Reference
 Reference code by Data Structure, Algorithm
