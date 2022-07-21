@@ -1,3 +1,15 @@
 .idea/
 
 test.py
+
+**/bin/
+**/.settings/
+**/.metadata/
+**/.recommenders/
+**/.idea/
+**/Servers/
+**/target/
+**/build/
+**/node_modules/
+**/.classpath
+**/.project
