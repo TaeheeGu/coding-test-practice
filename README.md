@@ -15,7 +15,7 @@ Reference code by Data Structure, Algorithm
 [__Repo for java__](https://github.com/TaeheeGu/coding-test-practice/tree/main/java/Backjoon/src/com)
 
 
- **/** [**Site**](https://www.acmicpc.net/)
+[**Site**](https://www.acmicpc.net/)
 
 ## SW Expert Academy
 [__Repo for python__](https://github.com/TaeheeGu/coding-test-practice/tree/main/python/SW%20Expert%20Academy)
@@ -23,6 +23,6 @@ Reference code by Data Structure, Algorithm
 [__Repo for java__](https://github.com/good-da22/coding-test-practice/tree/main/java/SW%20Expert%20Academy/src/swea)
 
 
- **/** [**Site**](https://swexpertacademy.com/main/main.do)
+[**Site**](https://swexpertacademy.com/main/main.do)
 
 [comment]: <> (## 프로그래머스)
