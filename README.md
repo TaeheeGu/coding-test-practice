@@ -11,7 +11,7 @@ Reference code by Data Structure, Algorithm
 ## Backjoon
 [__Repo for python__](https://github.com/good-da22/coding-test-practice/tree/main/python/Backjoon)
 
-[__Repo for java__](https://github.com/TaeheeGu/coding-test-practice/tree/main/python/Backjoon)
+[__Repo for java__](https://github.com/TaeheeGu/coding-test-practice/tree/main/java/Backjoon/src/com)
 
 
 [**Blog**](https://velog.io/@good_da22/series/Coding-Test)
