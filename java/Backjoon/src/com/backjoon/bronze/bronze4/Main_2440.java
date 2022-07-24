@@ -19,5 +19,18 @@ public class Main_2440 {
 			bw.write(star + "\n");
 			bw.flush();
 		}
+		bw.close();
+
+		// 숫자로 출력하기
+//		int cnt = 1;
+//		for (int i = n; i > 0; i--) {
+//			StringBuilder sb = new StringBuilder();
+//			for (int j = 0; j < i; j++) {
+//				sb.append(String.format("%3d", cnt++));
+//			}
+//			bw.write(sb + "\n");
+//			bw.flush();
+//		}
+//		bw.close();
 	}
 }

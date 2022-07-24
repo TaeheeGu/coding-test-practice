@@ -14,14 +14,29 @@ public class Main_2441 {
 
 		int n = Integer.parseInt(br.readLine());
 
-		for (int i = n; i > 0; i--) {
-			String star = new String(new char[i]).replace("\0", "*");
-			for (int j = 0; j < n - i; j++) {
-				bw.write(" ");
-				bw.flush();
-			}
-			bw.write(star + "\n");
-		}
-		bw.close();
+//		for (int i = n; i > 0; i--) {
+//			String star = new String(new char[i]).replace("\0", "*");
+//			for (int j = 0; j < n - i; j++) {
+//				bw.write(" ");
+//				bw.flush();
+//			}
+//			bw.write(star + "\n");
+//		}
+//		bw.close();
+
+		// 숫자로 출력하기
+//		int cnt = 1;
+//		for (int i = n; i > 0; i--) {
+//			StringBuilder sb = new StringBuilder();
+//			for (int j = 0; j < n - i; j++) {
+//				sb.append("   ");
+//			}
+//			for (int j = 0; j < i; j++) {
+//				sb.append(String.format("%3d", cnt++));
+//			}
+//			bw.write(sb + "\n");
+//			bw.flush();
+//		}
+//		bw.close();
 	}
 }

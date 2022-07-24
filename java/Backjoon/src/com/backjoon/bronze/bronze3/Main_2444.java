@@ -33,5 +33,31 @@ public class Main_2444 {
 			bw.flush();
 		}
 		bw.close();
+
+		// 숫자로 출력하기
+//		int cnt = 1;
+//		for (int i = 1; i <= n; i++) {
+//			StringBuilder sb = new StringBuilder();
+//			for (int j = 0; j < n - i; j++) {
+//				sb.append("   ");
+//			}
+//			for (int j = 0; j < i * 2 - 1; j++) {
+//				sb.append(String.format("%3d", cnt++));
+//			}
+//			bw.write(sb + "\n");
+//			bw.flush();
+//		}
+//		for (int i = n - 1; i > 0; i--) {
+//			StringBuilder sb = new StringBuilder();
+//			for (int j = 0; j < n - i; j++) {
+//				sb.append("   ");
+//			}
+//			for (int j = i * 2 - 1; j > 0; j--) {
+//				sb.append(String.format("%3d", cnt++));
+//			}
+//			bw.write(sb + "\n");
+//			bw.flush();
+//		}
+//		bw.close();
 	}
 }

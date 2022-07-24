@@ -1,6 +1,6 @@
 .idea/
 
-test.py
+**/test.py
 
 **/bin/
 **/.settings/

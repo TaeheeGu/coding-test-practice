@@ -1,4 +1,4 @@
-package swea.d1;
+package com.swea.d1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
