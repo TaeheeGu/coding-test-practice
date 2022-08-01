@@ -9,10 +9,10 @@ Reference code by Data Structure, Algorithm
 [**Data Structure**](https://github.com/TaeheeGu/coding-test-practice/tree/main/Reference/Data%20Structure)
  **/** [**Algorithm**](https://github.com/TaeheeGu/coding-test-practice/tree/main/Reference/Algorithm)
 
-## Backjoon
-[__Repo for python__](https://github.com/good-da22/coding-test-practice/tree/main/python/Backjoon)
+## Baekjoon
+[__Repo for python__](https://github.com/good-da22/coding-test-practice/tree/main/python/Baekjoon)
 
-[__Repo for java__](https://github.com/TaeheeGu/coding-test-practice/tree/main/java/Backjoon/src/com)
+[__Repo for java__](https://github.com/TaeheeGu/coding-test-practice/tree/main/java/Baekjoon/src/com)
 
 
 [**Site**](https://www.acmicpc.net/)
