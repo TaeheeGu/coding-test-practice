@@ -12,7 +12,7 @@ Reference code by Data Structure, Algorithm
 ## Baekjoon
 [__Repo for python__](https://github.com/good-da22/coding-test-practice/tree/main/Python/Baekjoon)
 
-[__Repo for java__](https://github.com/good-da22/coding-test-practice/tree/main/Java/Baekjoon/src/com/baekjoon)
+[__Repo for java__](https://github.com/good-da22/coding-test-practice/tree/main/java/Baekjoon/src/com/baekjoon)
 
 
 [**Site**](https://www.acmicpc.net/)
@@ -20,7 +20,7 @@ Reference code by Data Structure, Algorithm
 ## SW Expert Academy
 [__Repo for python__](https://github.com/TaeheeGu/coding-test-practice/tree/main/Python/SW%20Expert%20Academy)
 
-[__Repo for java__](https://github.com/good-da22/coding-test-practice/tree/main/Java/SW%20Expert%20Academy/src/com/swea)
+[__Repo for java__](https://github.com/good-da22/coding-test-practice/tree/main/java/SW%20Expert%20Academy/src/com/swea)
 
 
 [**Site**](https://swexpertacademy.com/main/main.do)
