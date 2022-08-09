@@ -12,21 +12,40 @@ import java.util.StringTokenizer;
 public class Main {
 	public static void main(String[] args) throws IOException {
 
-		//		System.setIn(new FileInputStream("input.txt")); 
+		// System.setIn(new FileInputStream("input.txt"));
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
-		
+
 		StringBuilder sb = new StringBuilder();
-	
-		while(true) {
-			StringTokenizer st = new StringTokenizer(in.readLine());
-			int left = Integer.parseInt(st.nextToken());
-			int center = Integer.parseInt(st.nextToken());
-			int right = Integer.parseInt(st.nextToken());
-			
-			
-			
+
+		while (true) {
+			try {
+				StringTokenizer st = new StringTokenizer(in.readLine());
+
+				int left = Integer.parseInt(st.nextToken());
+				int center = Integer.parseInt(st.nextToken());
+				int right = Integer.parseInt(st.nextToken());
+
+				int cnt = 0;
+
+				while (true) {
+					if (center - left <= 1 && right - center <= 1) {
+						break;
+					}
+					if (center - left <= right - center) { // 왼쪽 캥거루가 오른쪽으로
+						left = center;
+						center = right - 1;
+					} else {
+						right = center;
+						center = left + 1;
+					}
+					cnt++;
+				}
+				sb.append(cnt).append("\n");
+			} catch (Exception e) {
+				break;
+			}
 		}
 
 		out.write(sb.toString());
