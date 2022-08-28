@@ -8,8 +8,6 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-
-A형 기출 복슾 필
 // 백준, 16637번, 괄호 추가하기, 골드4
 // https://www.acmicpc.net/problem/16637
 public class Main {

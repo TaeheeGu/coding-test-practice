@@ -2,12 +2,9 @@ package com.swea.advanced.problem1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 // No. 1 [연습문제] 낚시터 자리잡기
@@ -17,10 +14,15 @@ public class Solution {
 	private static int N;
 	private static int[] gate;
 	private static int[] watting;
-	private static boolean[] isSelected;
-	private static int[] numbers;
-	private static int[] visited;
+
 	private static int answer;
+
+	// perm
+	private static int[] numbers;
+	private static boolean[] isSelected;
+
+	// dfs
+	private static int[] visited;
 
 	public static void main(String[] args) throws IOException {
 
@@ -43,17 +45,20 @@ public class Solution {
 
 			for (int i = 0; i < 3; i++) {
 				StringTokenizer st = new StringTokenizer(in.readLine());
+
 				gate[i] = Integer.parseInt(st.nextToken());
 				watting[i] = Integer.parseInt(st.nextToken());
 			}
 
+			answer = Integer.MAX_VALUE;
+
 			isSelected = new boolean[3];
 			numbers = new int[3];
-			answer = Integer.MAX_VALUE;
 			perm(0);
+
+			sb.append(answer).append("\n");
 		}
 
-		sb.append(answer);
 		out.write(sb.toString());
 		out.close();
 	}
@@ -61,103 +66,98 @@ public class Solution {
 	private static void perm(int cnt) {
 
 		if (cnt == 3) {
-			int[] visited = new int[N + 1];
-
-			System.out.println("case");
-			System.out.println(Arrays.toString(numbers));
-
-			getDist(0, visited);
+			visited = new int[N + 1];
+//			System.out.println(Arrays.toString(numbers));
+			dfs(0, 0, 0);
+//			System.out.println(Arrays.toString(visited));
 			return;
 		}
 
 		for (int i = 0; i < 3; i++) {
+
 			if (!isSelected[i]) {
 				isSelected[i] = true;
 				numbers[cnt] = i;
 				perm(cnt + 1);
+
 				isSelected[i] = false;
 			}
 		}
-
 	}
 
-	private static void getDist(int idx, int[] visited) {
+	private static void dfs(int idx, int cnt, int temp) {
 
-		if (idx == 3) {
-			int temp = 0;
-			for (int i = 1; i <= N; i++) {
-				temp += visited[i];
-			}
-			answer = Math.min(answer, temp);
-			System.out.println("visited");
-			System.out.println(Arrays.toString(visited));
+		if (temp > answer) {
 			return;
 		}
 
-		int gateNum = gate[numbers[idx]];
-		int wattingNum = watting[numbers[idx]];
-
-		if (visited[gateNum] == 0) {
-			visited[gateNum] = 1;
-			wattingNum--;
+		if (idx == 3) {
+//
+//			System.out.println(Arrays.toString(visited));
+			answer = Math.min(answer, temp);
+			return;
 		}
 
-		for (int i = 0; i < wattingNum - 1; i++) {
-			int leftMove = getLeft(gateNum, visited);
-			int rightMove = getRight(gateNum, visited);
+		if (watting[numbers[idx]] == cnt) {
+			dfs(idx + 1, 0, temp);
+		} else {
+			for (int i = 0; i <= N; i++) {
 
-			if (leftMove <= rightMove) {
-				visited[gateNum - leftMove + 1] = leftMove;
-			} else {
-				visited[gateNum + rightMove - 1] = rightMove;
+				int len = i + 1;
+
+				if (watting[numbers[idx]] - cnt > 1) {
+
+					if ((0 < gate[numbers[idx]] - i) && visited[gate[numbers[idx]] - i] == 0) {
+
+						visited[gate[numbers[idx]] - i] = len;
+
+						dfs(idx, cnt + 1, temp + len);
+
+						visited[gate[numbers[idx]] - i] = 0;
+						break;
+					}
+
+					if ((gate[numbers[idx]] + i <= N) && visited[gate[numbers[idx]] + i] == 0) {
+
+						visited[gate[numbers[idx]] + i] = len;
+
+						dfs(idx, cnt + 1, temp + len);
+
+						visited[gate[numbers[idx]] + i] = 0;
+						break;
+					}
+
+				}
+
+				else {
+
+					if ((0 < gate[numbers[idx]] - i && visited[gate[numbers[idx]] - i] == 0) && (gate[numbers[idx]] + i <= N && visited[gate[numbers[idx]] + i] == 0)) {
+
+						visited[gate[numbers[idx]] - i] = len;
+						dfs(idx, cnt + 1, temp + len);
+						visited[gate[numbers[idx]] - i] = 0;
+
+						visited[gate[numbers[idx]] + i] = len;
+						dfs(idx, cnt + 1, temp + len);
+						visited[gate[numbers[idx]] + i] = 0;
+
+						break;
+					} else if ((0 < gate[numbers[idx]] - i && visited[gate[numbers[idx]] - i] == 0)) {
+						visited[gate[numbers[idx]] - i] = len;
+						dfs(idx, cnt + 1, temp + len);
+						visited[gate[numbers[idx]] - i] = 0;
+						break;
+					} else if ((gate[numbers[idx]] + i <= N && visited[gate[numbers[idx]] + i] == 0)) {
+						visited[gate[numbers[idx]] + i] = len;
+						dfs(idx, cnt + 1, temp + len);
+						visited[gate[numbers[idx]] + i] = 0;
+						break;
+
+					}
+				}
 			}
-		}
-
-		int leftMove = getLeft(gateNum, visited);
-		int rightMove = getRight(gateNum, visited);
-
-		if (leftMove < rightMove) {
-			visited[gateNum - leftMove + 1] = leftMove;
-			getDist(idx + 1 , visited);
-		} else if (leftMove > rightMove) {
-			visited[gateNum + rightMove - 1] = rightMove;
-			getDist(idx + 1 , visited);
-		} else if (leftMove == rightMove) {
-			visited[gateNum - leftMove + 1] = leftMove;
-			getDist(idx + 1 , visited);
-			
-			visited[gateNum - leftMove + 1] = 0;
-			visited[gateNum + rightMove - 1] = rightMove;
-			getDist(idx + 1 , visited);
 		}
 
 	}
 
-	private static int getRight(int gateNum, int[] visited) {
-		int dist = 0;
-
-		for (int i = gateNum + 1; i <= N; i++) {
-			if (visited[i] == 0) {
-				dist = i - gateNum + 1;
-				break;
-			}
-
-		}
-
-		return dist != 0 ? dist : Integer.MAX_VALUE;
-	}
-
-	private static int getLeft(int gateNum, int[] visited) {
-		int dist = 0;
-
-		for (int i = gateNum - 1; i > 0; i--) {
-			if (visited[i] == 0) {
-				dist = gateNum - i + 1;
-				break;
-			}
-
-		}
-
-		return dist != 0 ? dist : Integer.MAX_VALUE;
-	}
 }
