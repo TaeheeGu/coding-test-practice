@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
+
+// No. 3 [연습문제] suffle
 public class Solution {
 
 	private static int N;

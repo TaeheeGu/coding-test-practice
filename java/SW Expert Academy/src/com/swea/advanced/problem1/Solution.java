@@ -8,7 +8,7 @@ import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 // No. 1 [연습문제] 낚시터 자리잡기
-// https://swexpertacademy.com/main/talk/codeBattle/problemDetail.do?contestProbId=AYLNTUm6AswDFASv&categoryId=AYLNSmY6An0DFASv&categoryType=BATTLE&battleMainPageIndex=
+//
 public class Solution {
 
 	private static int N;

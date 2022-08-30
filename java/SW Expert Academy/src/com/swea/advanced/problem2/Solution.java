@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+// No. 2 [연습문제] 헌터
 public class Solution {
 
 	private static int N;
