@@ -13,9 +13,8 @@ import java.util.StringTokenizer;
 public class Main {
 
 	static int N, answer;
-	static List<Integer>[] adj;
+	static List<List<Integer>> adj;
 	static int[] size;
-
 	static int[] numbers;
 
 	public static void main(String[] args) throws Exception {
@@ -28,7 +27,7 @@ public class Main {
 		N = Integer.parseInt(in.readLine());
 
 		size = new int[N + 1]; // 인구 수
-		adj = new List[N + 1];
+		adj = new ArrayList<>();
 
 		StringTokenizer st = new StringTokenizer(in.readLine());
 		for (int i = 1; i <= N; i++) {
@@ -38,14 +37,11 @@ public class Main {
 		for (int i = 1; i <= N; i++) {
 			List<Integer> list = new ArrayList<>();
 			st = new StringTokenizer(in.readLine());
-			while (true) {
-				try {
-					list.add(Integer.parseInt(st.nextToken()));
-				} catch (Exception e) {
-					break;
-				}
+			int X = Integer.parseInt(st.nextToken());
+			for (int x = 0; x < X; x++) {
+				list.add(Integer.parseInt(st.nextToken()));
 			}
-			adj[i] = list;
+			adj.add(list);
 		}
 
 		answer = Integer.MAX_VALUE;
@@ -64,70 +60,69 @@ public class Main {
 		out.close();
 	}
 
-	private static void comb(int start, int cnt, int depth) {
-		if (cnt == depth) {
-			List<Integer> first = new ArrayList<>();
-			List<Integer> second = new ArrayList<>();
+	private static void comb(int start, int depth, int cnt) {
+		if (depth == cnt) {
+			List<Integer> groupA = new ArrayList<>();
+			List<Integer> groupB = new ArrayList<>();
+
+			for (int i = 0; i < cnt; i++) {
+				groupA.add(numbers[i]);
+			}
 
 			for (int i = 1; i <= N; i++) {
-				second.add(i);
+				if (!groupA.contains(i)) {
+					groupB.add(i);
+				}
 			}
-			for (int i = 0; i < depth; i++) {
-				first.add(numbers[i]);
-			}
-			for (int i = 0; i < depth; i++) {
-				second.remove(Integer.valueOf(numbers[i]));
-			}
+			int sizeA = 0;
+			int sizeB = 0;
 
-			int firstSum = bfs(first);
-			int secondSum = bfs(second);
+			sizeA = bfs(groupA);
+			sizeB = bfs(groupB);
 
-			if (firstSum != 0 && secondSum != 0) {
-				answer = Math.min(answer, Math.abs(firstSum - secondSum));
+			if (sizeA != 0 && sizeB != 0) {
+				answer = Math.min(answer, Math.abs(sizeA - sizeB));
 			}
 
 			return;
 		}
 
 		for (int i = start; i <= N; i++) {
-			numbers[cnt] = i;
-			comb(i + 1, cnt + 1, depth);
+			numbers[depth] = i;
+			comb(i + 1, depth + 1, cnt);
 		}
 
 	}
 
-	private static int bfs(List<Integer> list) {
+	private static int bfs(List<Integer> group) {
 		boolean[] visited = new boolean[N + 1];
 
-		int start = list.get(0);
-
 		Queue<Integer> queue = new ArrayDeque<>();
+		int cur = group.get(0);
+		queue.offer(cur);
+		visited[cur] = true;
+		int temp = size[cur];
 
-		queue.offer(start);
-		visited[start] = true;
 
 		while (!queue.isEmpty()) {
-			int current = queue.poll();
+			cur = queue.poll();
 
-			for (int i = 0; i < adj[current].size(); i++) {
-				int next = adj[current].get(i);
-				if (list.contains(next) && !visited[next]) {
-					visited[next] = true;
+			for (int i = 0; i < adj.get(cur - 1).size(); i++) {
+				int next = adj.get(cur - 1).get(i);
+				if (group.contains(next) && !visited[next]) {
 					queue.offer(next);
+					visited[next] = true;
+					temp += size[next];
 				}
 			}
 		}
 
-		int sum = 0;
-		for (int i = 0; i < list.size(); i++) {
-			int idx = list.get(i);
-			if (!visited[idx]) {
+		for (int i : group) {
+			if (!visited[i]) {
 				return 0;
 			}
-			sum += size[idx];
 		}
-
-		return sum;
+		return temp;
 	}
 
 }
