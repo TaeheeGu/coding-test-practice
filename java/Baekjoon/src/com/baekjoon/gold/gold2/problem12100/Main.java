@@ -7,14 +7,13 @@ import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-xxx
 public class Main {
 
 	static int N, answer;
 	static int[][] board, test;
 	static boolean[][] used;
 
-	static int[] dx = { -1, 1, 0, 0 };
+	static int[] dx = { -1, 1, 0, 0 }; // 상 하 좌 우
 	static int[] dy = { 0, 0, -1, 1 };
 
 	static int[] numbers;
@@ -47,6 +46,7 @@ public class Main {
 
 	private static void repetitionPerm(int cnt) {
 		if (cnt == 5) {
+
 			copy(); // 각 단위에서 사용될 보드, 원본 유지
 			for (int i = 0; i < 5; i++) {
 				int dir = numbers[i];
@@ -54,6 +54,7 @@ public class Main {
 
 			}
 			findMax(); // 이동 종료 후 최댓값 탐색
+
 			return;
 		}
 
@@ -82,10 +83,9 @@ public class Main {
 		if (dir == 0) {
 			for (int r = 0; r < N; r++) {
 				for (int c = 0; c < N; c++) {
-					if (test[r][c] == 0) {
-						continue;
+					if (test[r][c] != 0) {
+						moving(r, c, dir);
 					}
-					moving(r, c, dir);
 				}
 			}
 			return;
@@ -93,12 +93,12 @@ public class Main {
 
 		// 아래로 이동하는 경우 N-1행부터 내린다.
 		if (dir == 1) {
+
 			for (int r = N - 1; r >= 0; r--) {
 				for (int c = 0; c < N; c++) {
-					if (test[r][c] == 0) {
-						continue;
+					if (test[r][c] != 0) {
+						moving(r, c, dir);
 					}
-					moving(r, c, dir);
 				}
 			}
 			return;
@@ -108,10 +108,9 @@ public class Main {
 		if (dir == 2) {
 			for (int c = 0; c < N; c++) {
 				for (int r = 0; r < N; r++) {
-					if (test[r][c] == 0) {
-						continue;
+					if (test[r][c] != 0) {
+						moving(r, c, dir);
 					}
-					moving(r, c, dir);
 				}
 			}
 			return;
@@ -121,10 +120,9 @@ public class Main {
 		if (dir == 3) {
 			for (int c = N - 1; c >= 0; c--) {
 				for (int r = 0; r < N; r++) {
-					if (test[r][c] == 0) {
-						continue;
+					if (test[r][c] != 0) {
+						moving(r, c, dir);
 					}
-					moving(r, c, dir);
 				}
 			}
 			return;
@@ -138,12 +136,13 @@ public class Main {
 			int nextR = curR + dx[dir];
 			int nextC = curC + dy[dir];
 
-			if (nextR < 0 || nextR >= N || nextC < 0 || nextC >= N || used[nextR][nextC]
-					|| test[nextR][nextC] != test[curR][curC]) {
+			if (nextR < 0 || nextR >= N || nextC < 0 || nextC >= N || used[nextR][nextC]) {
 				break;
 			}
+
 			// 다음 위치가 비어있는 경우
 			if (test[nextR][nextC] == 0) {
+
 				test[nextR][nextC] = test[curR][curC];
 				test[curR][curC] = 0;
 
@@ -157,6 +156,11 @@ public class Main {
 				test[nextR][nextC] = test[curR][curC] * 2;
 				test[curR][curC] = 0;
 				used[nextR][nextC] = true;
+				break;
+			}
+
+			// 다음 위치의 블록과 현재 블록의 값이 다르다면
+			if (test[nextR][nextC] != test[curR][curC]) {
 				break;
 			}
 
