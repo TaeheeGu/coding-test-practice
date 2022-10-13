@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -43,16 +42,12 @@ public class Solution {
 				int c = Integer.parseInt(st.nextToken());
 				int size = Integer.parseInt(st.nextToken());
 				int dir = Integer.parseInt(st.nextToken());
-				map[r][c] = new Bacteria(size, dir);
+				map[r][c] = new Bacteria(size, dir, size);
 				queue.offer(new Point(r, c));
 			}
 
 			for (int i = 1; i <= M; i++) {
 				move();
-//				for(int x = 0; x < N;x++) {
-//					System.out.println(Arrays.toString(map[x]));
-//				}
-//				System.out.println();
 			}
 
 			int answer = 0;
@@ -71,8 +66,8 @@ public class Solution {
 	}
 
 	private static void move() {
-		Bacteria[][] tempArr = new Bacteria[N][N];
-		Queue<Point> tempQue = new ArrayDeque<>();
+		Bacteria[][] nextMap = new Bacteria[N][N];
+		Queue<Point> nextQue = new ArrayDeque<>();
 		while (!queue.isEmpty()) {
 			Point cur = queue.poll();
 
@@ -84,47 +79,40 @@ public class Solution {
 			int nextR = r + dx[dir];
 			int nextC = c + dy[dir];
 
-//			다음 위치에 다른 군집이 있는 경우
-			if (tempArr[nextR][nextC] != null) {
+			// 가장 자리에 위치하게 되는 경우
+			if (nextR == N - 1 || nextR == 0 || nextC == N - 1 || nextC == 0) {
+				dir = changeDir(dir);
+				size = size / 2;
+			}
 
-//				기존의 값
-				int pre = tempArr[nextR][nextC].size;
+			if (size == 0) {
+				continue;
+			}
+
+			// 다음 위치에 다른 군집이 있는 경우
+			if (nextMap[nextR][nextC] != null) {
+				// 기존의 값의 합
+				int totalSize = nextMap[nextR][nextC].size;
+				totalSize = size + totalSize;
+				// 기존 최댓값
+				int preSize = nextMap[nextR][nextC].preSize;
 
 				// 기존의 값이 큰 경우 기존의 방향 유지
-				if (pre > size) {
-					dir = tempArr[nextR][nextC].dir;
+				if (preSize > size) {
+					dir = nextMap[nextR][nextC].dir;
+				} else {
+					preSize = size;
 				}
-
-				// 기존의 값이 작은 경우 현재의 방향 유지
-
-//				합쳐진 크기
-				size = size + pre;
-
-				if (nextR == N - 1 || nextR == 0 || nextC == N - 1 || nextC == 0) {
-					dir = changeDir(dir);
-					size = size / 2;
-				}
-				if (size > 0) {
-					tempArr[nextR][nextC] = new Bacteria(size, dir);
-				}
+				nextMap[nextR][nextC] = new Bacteria(totalSize, dir, preSize);
 			}
-
-//			다음 위치에 다른 군집이 없는 경우
-			if (tempArr[nextR][nextC] == null) {
-//				가장 자리에 위치하게 되는 경우
-				if (nextR == N - 1 || nextR == 0 || nextC == N - 1 || nextC == 0) {
-					dir = changeDir(dir);
-					size = size / 2;
-
-				}
-				if (size > 0) {
-					tempArr[nextR][nextC] = new Bacteria(size, dir);
-					tempQue.offer(new Point(nextR, nextC));
-				}
+			// 다음 위치에 다른 군집이 없는 경우, 다음 방문을 위해 큐에 삽입
+			if (nextMap[nextR][nextC] == null) {
+				nextQue.offer(new Point(nextR, nextC));
+				nextMap[nextR][nextC] = new Bacteria(size, dir, size);
 			}
 		}
-		map = tempArr;
-		queue = tempQue;
+		map = nextMap;
+		queue = nextQue;
 
 	}
 
@@ -150,15 +138,17 @@ public class Solution {
 class Bacteria {
 	int size;
 	int dir;
+	int preSize;
 
 	public Bacteria(int size, int dir) {
 		this.size = size;
 		this.dir = dir;
 	}
 
-	@Override
-	public String toString() {
-		return "__" + size + "_";
+	public Bacteria(int size, int dir, int preSize) {
+		this.size = size;
+		this.dir = dir;
+		this.preSize = preSize;
 	}
 }
 
