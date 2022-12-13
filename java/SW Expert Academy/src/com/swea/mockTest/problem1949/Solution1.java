@@ -1,3 +1,4 @@
+package com.swea.mockTest.temp;
 //package com.swea.mockTest.problem1949;
 //
 //import java.io.BufferedReader;
