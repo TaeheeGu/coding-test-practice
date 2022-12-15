@@ -1,4 +1,4 @@
-package com.swea.mockTest.p;
+package com.swea.mockTest.problem1949;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
