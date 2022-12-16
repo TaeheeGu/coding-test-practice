@@ -6,11 +6,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
-public class Main -{
+public class Main {
 
 	public static void main(String[] args) throws Exception {
 
@@ -25,47 +23,28 @@ public class Main -{
 
 			int N = Integer.parseInt(in.readLine());
 
-			HashMap<Integer, List<String>> map = new HashMap<>();
-			List<Integer> keyList = new ArrayList<>();
+			List<String> list = new ArrayList<>(N);
 
 			for (int i = 0; i < N; i++) {
-				String st = in.readLine();
-				int len = st.length();
-
-				if (map.containsKey(len)) {
-					map.get(len).add(st);
-				} else {
-					List<String> list = new ArrayList<>();
-					list.add(st);
-					map.put(len, list);
-					keyList.add(len);
-				}
+				list.add(in.readLine());
 			}
 
-			Collections.sort(keyList);
+			Collections.sort(list);
 
 			String answer = "YES";
 
-			loop: for (int i = 0; i < keyList.size() - 1; i++) {
-				List<String> numbers = map.get(keyList.get(i));
+			for (int i = 0; i < N - 1; i++) {
+				String pre = list.get(i);
+				String next = list.get(i + 1);
 
-				for (int j = 0; j < numbers.size(); j++) {
-					String head = numbers.get(j);
-
-					for (int k = i + 1; k < keyList.size(); k++) {
-
-						List<String> nextNums = map.get(keyList.get(k));
-
-						for (int h = 0; h < nextNums.size(); h++) {
-							String next = nextNums.get(h);
-							if (head.equals(next.substring(0, head.length()))) {
-								answer = "NO";
-								break loop;
-							}
-						}
-					}
+				if (pre.length() > next.length()) {
+					continue;
 				}
 
+				if (pre.equals(next.substring(0, pre.length()))) {
+					answer = "NO";
+					break;
+				}
 			}
 
 			sb.append(answer).append('\n');
