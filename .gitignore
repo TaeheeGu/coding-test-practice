@@ -4,6 +4,11 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Gradle ###
+# Exclude Folder List #
+.gradle/
+build/
+
 ### STS ###
 .apt_generated
 .classpath
@@ -12,6 +17,34 @@ target/
 .settings
 .springBeans
 .sts4-cache
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+### Eclipse ###
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
 
 ### IntelliJ IDEA ###
 .idea
@@ -42,3 +75,9 @@ build/
 **/build/
 **/node_modules/
 **/.vscode/
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
