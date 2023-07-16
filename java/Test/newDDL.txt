@@ -1,7 +1,5 @@
 
-﻿-- 직원 Table 
- 
---------------------------------------------------------------
+-----------------------------------------CREATE DEPARTMENT-----------------------------------------
 CREATE TABLE TIBERO."DEPARTMENT" ( 
                               "ID"	NUMBER(38, 0)		NOT NULL, 
                               "NM"	VARCHAR(255)		NULL, 
@@ -13,7 +11,9 @@ COMMENT ON COLUMN TIBERO."DEPARTMENT"."ID" IS 'SEQUENCE';
  
 COMMENT ON COLUMN TIBERO."DEPARTMENT"."NM" IS '*NAME / 부서 이름'; 
  
---------------------------------------------------------------
+ 
+
+-----------------------------------------CREATE JOB_TITLE-----------------------------------------
 CREATE TABLE TIBERO."JOB_TITLE" ( 
                              "ID"	NUMBER(38, 0)		NOT NULL, 
                              "NM"	VARCHAR(255)		NULL, 
@@ -25,7 +25,9 @@ COMMENT ON COLUMN TIBERO."JOB_TITLE"."ID" IS 'SEQUENCE';
  
 COMMENT ON COLUMN TIBERO."JOB_TITLE"."NM" IS '*NAME / 직책 이름'; 
  
---------------------------------------------------------------
+ 
+
+-----------------------------------------CREATE JOB_POSITION-----------------------------------------
 CREATE TABLE TIBERO."JOB_POSITION" ( 
                                 "ID"	NUMBER(38, 0)		NOT NULL, 
                                 "NM"	VARCHAR(255)		NULL, 
@@ -37,7 +39,9 @@ COMMENT ON COLUMN TIBERO."JOB_POSITION"."ID" IS 'SEQUENCE';
  
 COMMENT ON COLUMN TIBERO."JOB_POSITION"."NM" IS '*NAME / 직위 이름'; 
  
---------------------------------------------------------------
+ 
+
+-----------------------------------------CREATE EMPLOYEE-----------------------------------------
 CREATE TABLE TIBERO."EMPLOYEE" ( 
                             "ID"	NUMBER(38, 0)		NOT NULL, 
                             "DEPT_ID"	NUMBER(38, 0)		NOT NULL, 
@@ -70,7 +74,9 @@ COMMENT ON COLUMN TIBERO."EMPLOYEE"."EML" IS '*EMAIL / 이메일';
  
 COMMENT ON COLUMN TIBERO."EMPLOYEE"."TEL" IS '*TEL / 연락처'; 
  
---------------------------------------------------------------
+ 
+
+-----------------------------------------CREATE UNION_EMPLOYEE_REL-----------------------------------------
 CREATE TABLE TIBERO."UNION_EMPLOYEE_REL" ( 
                                       "ID"	NUMBER(38, 0)		NOT NULL, 
                                       "UNION_ID"	NUMBER(38, 0)		NOT NULL, 
@@ -85,7 +91,9 @@ COMMENT ON COLUMN TIBERO."UNION_EMPLOYEE_REL"."UNION_ID" IS '*UNION ID / 조합�
  
 COMMENT ON COLUMN TIBERO."UNION_EMPLOYEE_REL"."EMP_ID" IS '*EMPLOYEE ID / 직원 ID'; 
  
---------------------------------------------------------------
+ 
+
+-----------------------------------------CREATE CUSTOMER-----------------------------------------
 CREATE TABLE TIBERO."CUSTOMER" ( 
                             "ID"	NUMBER(38, 0)		NOT NULL, 
                             "TY"	VARCHAR(255)		NULL, 
@@ -100,7 +108,41 @@ COMMENT ON COLUMN TIBERO."CUSTOMER"."TY" IS '*TYPE / 고객 유형 / 종사자 ,
  
 COMMENT ON COLUMN TIBERO."CUSTOMER"."CD" IS '*CODE / 고객 코드'; 
  
---------------------------------------------------------------
+ 
+
+-----------------------------------------CREATE PERSONAL_CUSTOMER-----------------------------------------
+CREATE TABLE TIBERO."PERSONAL_CUSTOMER" ( 
+                                     "ID"	NUMBER(38, 0)		NOT NULL, 
+                                     "CUST_ID"	NUMBER(38, 0)		NOT NULL, 
+                                     "GENDER"	VARCHAR(1)		NULL, 
+                                     "RRNO"	VARCHAR(255)		NULL, 
+                                     "JOIN_DT"	TIMESTAMP		NULL, 
+                                     "TEL"	VARCHAR(255)		NULL, 
+                                     "NM"	VARCHAR(255)		NULL, 
+                                     "EML"	VARCHAR(255)		NULL, 
+                                     "CREATED_AT"	TIMESTAMP		NULL, 
+                                     "UPDATED_AT"	TIMESTAMP		NULL 
+); 
+ 
+COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."ID" IS 'SEQUENCE'; 
+ 
+COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."CUST_ID" IS '*CUSTOMER ID / 고객 ID'; 
+ 
+COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."GENDER" IS '*GENDER / 성별 / F, M'; 
+ 
+COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."RRNO" IS '*RESIDENT REGISTRATION NUMBER / 주민등록번호'; 
+ 
+COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."JOIN_DT" IS '*JOIN DATE /  등록일'; 
+ 
+COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."TEL" IS '*TELEPHONE / 휴대폰'; 
+ 
+COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."NM" IS '*NAME / 이름'; 
+ 
+COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."EML" IS '*EMAIL / 이메일'; 
+ 
+ 
+
+-----------------------------------------CREATE UNION-----------------------------------------
 CREATE TABLE TIBERO."UNION" ( 
                          "ID"	NUMBER(38, 0)		NOT NULL, 
                          "CUST_ID"	NUMBER(38, 0)		NOT NULL, 
@@ -139,37 +181,26 @@ COMMENT ON COLUMN TIBERO."UNION"."TY" IS '*TYPE / 유형';
  
 COMMENT ON COLUMN TIBERO."UNION"."ADDR" IS '*ADDERSS / 주소'; 
  
---------------------------------------------------------------
-CREATE TABLE TIBERO."PERSONAL_CUSTOMER" ( 
-                                     "ID"	NUMBER(38, 0)		NOT NULL, 
-                                     "CUST_ID"	NUMBER(38, 0)		NOT NULL, 
-                                     "GENDER"	VARCHAR(1)		NULL, 
-                                     "RRNO"	VARCHAR(255)		NULL, 
-                                     "JOIN_DT"	TIMESTAMP		NULL, 
-                                     "TEL"	VARCHAR(255)		NULL, 
-                                     "NM"	VARCHAR(255)		NULL, 
-                                     "EML"	VARCHAR(255)		NULL, 
-                                     "CREATED_AT"	TIMESTAMP		NULL, 
-                                     "UPDATED_AT"	TIMESTAMP		NULL 
+ 
+
+-----------------------------------------CREATE RIDER_UNION_REL-----------------------------------------
+CREATE TABLE TIBERO."RIDER_UNION_REL" ( 
+                                   "ID"	NUMBER(38, 0)		NOT NULL, 
+                                   "UNION_ID"	NUMBER(38, 0)		NOT NULL, 
+                                   "RIDER_ID"	NUMBER(38, 0)		NOT NULL, 
+                                   "CREATED_AT"	TIMESTAMP		NULL, 
+                                   "UPDATED_AT"	TIMESTAMP		NULL 
 ); 
  
-COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."ID" IS 'SEQUENCE'; 
+COMMENT ON COLUMN TIBERO."RIDER_UNION_REL"."ID" IS 'SEQUENCE'; 
  
-COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."CUST_ID" IS '*CUSTOMER ID / 고객 ID'; 
+COMMENT ON COLUMN TIBERO."RIDER_UNION_REL"."UNION_ID" IS '*UNION ID / 조합원 ID'; 
  
-COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."GENDER" IS '*GENDER / 성별 / F, M'; 
+COMMENT ON COLUMN TIBERO."RIDER_UNION_REL"."RIDER_ID" IS '*RIDER ID / 라이더 ID'; 
  
-COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."RRNO" IS '*RESIDENT REGISTRATION NUMBER / 주민등록번호'; 
  
-COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."JOIN_DT" IS '*JOIN DATE /  등록일'; 
- 
-COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."TEL" IS '*TELEPHONE / 휴대폰'; 
- 
-COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."NM" IS '*NAME / 이름'; 
- 
-COMMENT ON COLUMN TIBERO."PERSONAL_CUSTOMER"."EML" IS '*EMAIL / 이메일'; 
- 
---------------------------------------------------------------
+
+-----------------------------------------CREATE RIDER-----------------------------------------
 CREATE TABLE TIBERO."RIDER" ( 
                          "ID"	NUMBER(38, 0)		NOT NULL, 
                          "PRCUST_ID"	NUMBER(38, 0)		NOT NULL, 
@@ -187,74 +218,22 @@ COMMENT ON COLUMN TIBERO."RIDER"."JOB_TY" IS '*JOB TYPE / 전업유형 / 전업,
  
 COMMENT ON COLUMN TIBERO."RIDER"."RISK_TY" IS '*RISK TYPE / 위험 유형'; 
  
---------------------------------------------------------------
-CREATE TABLE TIBERO."RIDER_UNION_REL" ( 
-                                   "ID"	NUMBER(38, 0)		NOT NULL, 
-                                   "UNION_ID"	NUMBER(38, 0)		NOT NULL, 
-                                   "RIDER_ID"	NUMBER(38, 0)		NOT NULL, 
-                                   "CREATED_AT"	TIMESTAMP		NULL, 
-                                   "UPDATED_AT"	TIMESTAMP		NULL 
-); 
  
-COMMENT ON COLUMN TIBERO."RIDER_UNION_REL"."ID" IS 'SEQUENCE'; 
- 
-COMMENT ON COLUMN TIBERO."RIDER_UNION_REL"."UNION_ID" IS '*UNION ID / 조합원 ID'; 
- 
-COMMENT ON COLUMN TIBERO."RIDER_UNION_REL"."RIDER_ID" IS '*RIDER ID / 라이더 ID'; 
- 
---------------------------------------------------------------
-CREATE TABLE TIBERO."TERMS" ( 
-                         "ID"	NUMBER(38, 0)		NOT NULL, 
-                         "NM"	VARCHAR(255)		NULL, 
-                         "CD"	VARCHAR(255)		NULL, 
-                         "CN"	LONG		NULL, 
-                         "ESNTL_YN"	VARCHAR(1)	DEFAULT "N"	NULL, 
-                         "CREATED_AT"	TIMESTAMP		NULL, 
-                         "UPDATED_AT"	TIMESTAMP		NULL 
-); 
- 
-COMMENT ON COLUMN TIBERO."TERMS"."ID" IS 'SEQUENCE'; 
- 
-COMMENT ON COLUMN TIBERO."TERMS"."NM" IS '*NAME / 약관 이름'; 
- 
-COMMENT ON COLUMN TIBERO."TERMS"."CD" IS '*CODE / 약관 코드'; 
- 
-COMMENT ON COLUMN TIBERO."TERMS"."CN" IS '*CONTENT / 약관 내용'; 
- 
-COMMENT ON COLUMN TIBERO."TERMS"."ESNTL_YN" IS '*ESSENTIAL YN / 약관 필수 동의 여부'; 
- 
---------------------------------------------------------------
-CREATE TABLE TIBERO."CUSTOMER_TERMS_REL" ( 
-                                      "ID"	NUMBER(38, 0)		NOT NULL, 
-                                      "CUST_ID"	NUMBER(38, 0)		NOT NULL, 
-                                      "TERMS_ID"	NUMBER(38, 0)		NOT NULL, 
-                                      "AGRE_DT"	TIMESTAMP		NULL, 
-                                      "CREATED_AT"	TIMESTAMP		NULL, 
-                                      "UPDATED_AT"	TIMESTAMP		NULL 
-); 
- 
-COMMENT ON COLUMN TIBERO."CUSTOMER_TERMS_REL"."ID" IS 'SEQUENCE'; 
- 
-COMMENT ON COLUMN TIBERO."CUSTOMER_TERMS_REL"."CUST_ID" IS '*CUSTOMER ID / 고객 ID'; 
- 
-COMMENT ON COLUMN TIBERO."CUSTOMER_TERMS_REL"."TERMS_ID" IS '*TERMS ID / 약관 ID'; 
- 
-COMMENT ON COLUMN TIBERO."CUSTOMER_TERMS_REL"."AGRE_DT" IS '*AGREEMENT DATE / 동의 일시'; 
- 
---------------------------------------------------------------
+
+-----------------------------------------CREATE DISCUSSION-----------------------------------------
 CREATE TABLE TIBERO."DISCUSSION" ( 
                               "ID"	NUMBER(38, 0)		NOT NULL, 
                               "CUST_ID"	NUMBER(38, 0)		NOT NULL, 
                               "NO"	VARCHAR(255)		NULL, 
                               "PSBLTY_BGNG_HR"	NUMBER(38, 0)		NULL, 
                               "PSBLTY_END_HR"	NUMBER(38, 0)		NULL, 
-                              "APLY_CN"	LONG		NULL, 
+                              "APLY_CN"	VARCHAR(2000)		NULL, 
                               "APLY_TY"	VARCHAR(255)		NULL, 
                               "APLY_DT"	TIMESTAMP		NULL, 
                               "STTS"	VARCHAR(255)		NULL, 
                               "BGNG_DATE"	TIMESTAMP		NULL, 
                               "END_DT"	TIMESTAMP		NULL, 
-                              "CN"	LONG		NULL, 
+                              "CN"	VARCHAR(2000)		NULL, 
                               "EMP_ID"	NUMBER(38, 0)		NULL, 
                               "EMP_DEPT"	VARCHAR(255)		NULL, 
                               "EMP_JBPS"	VARCHAR(255)		NULL, 
@@ -295,7 +274,52 @@ COMMENT ON COLUMN TIBERO."DISCUSSION"."EMP_JBPS" IS '*EMPLOYEE JOB POSITION / �
  
 COMMENT ON COLUMN TIBERO."DISCUSSION"."EMP_JBTTL" IS '*EMPLOYEE JOB TITLE / 담당 직원 직책'; 
  
---------------------------------------------------------------
+ 
+
+-----------------------------------------CREATE TERMS-----------------------------------------
+CREATE TABLE TIBERO."TERMS" ( 
+                         "ID"	NUMBER(38, 0)		NOT NULL, 
+                         "NM"	VARCHAR(255)		NULL, 
+                         "CD"	VARCHAR(255)		NULL, 
+                         "CN"	VARCHAR(2000)		NULL, 
+                         "ESNTL_YN"	VARCHAR(1)	DEFAULT 'N'	NULL, 
+                         "CREATED_AT"	TIMESTAMP		NULL, 
+                         "UPDATED_AT"	TIMESTAMP		NULL 
+); 
+ 
+COMMENT ON COLUMN TIBERO."TERMS"."ID" IS 'SEQUENCE'; 
+ 
+COMMENT ON COLUMN TIBERO."TERMS"."NM" IS '*NAME / 약관 이름'; 
+ 
+COMMENT ON COLUMN TIBERO."TERMS"."CD" IS '*CODE / 약관 코드'; 
+ 
+COMMENT ON COLUMN TIBERO."TERMS"."CN" IS '*CONTENT / 약관 내용'; 
+ 
+COMMENT ON COLUMN TIBERO."TERMS"."ESNTL_YN" IS '*ESSENTIAL YN / 약관 필수 동의 여부'; 
+ 
+ 
+
+-----------------------------------------CREATE CUSTOMER_TERMS_REL-----------------------------------------
+CREATE TABLE TIBERO."CUSTOMER_TERMS_REL" ( 
+                                      "ID"	NUMBER(38, 0)		NOT NULL, 
+                                      "CUST_ID"	NUMBER(38, 0)		NOT NULL, 
+                                      "TERMS_ID"	NUMBER(38, 0)		NOT NULL, 
+                                      "AGRE_DT"	TIMESTAMP		NULL, 
+                                      "CREATED_AT"	TIMESTAMP		NULL, 
+                                      "UPDATED_AT"	TIMESTAMP		NULL 
+); 
+ 
+COMMENT ON COLUMN TIBERO."CUSTOMER_TERMS_REL"."ID" IS 'SEQUENCE'; 
+ 
+COMMENT ON COLUMN TIBERO."CUSTOMER_TERMS_REL"."CUST_ID" IS '*CUSTOMER ID / 고객 ID'; 
+ 
+COMMENT ON COLUMN TIBERO."CUSTOMER_TERMS_REL"."TERMS_ID" IS '*TERMS ID / 약관 ID'; 
+ 
+COMMENT ON COLUMN TIBERO."CUSTOMER_TERMS_REL"."AGRE_DT" IS '*AGREEMENT DATE / 동의 일시'; 
+ 
+ 
+
+-----------------------------------------CREATE VEHICLE-----------------------------------------
 CREATE TABLE TIBERO."VEHICLE" ( 
                            "ID"	NUMBER(38, 0)		NOT NULL, 
                            "CUST_ID"	NUMBER(38, 0)		NOT NULL, 
@@ -304,12 +328,12 @@ CREATE TABLE TIBERO."VEHICLE" (
                            "VIN"	VARCHAR(17)		NULL, 
                            "VHCL_REG_YMD"	TIMESTAMP		NULL, 
                            "USG"	VARCHAR(255)		NULL, 
-                           "ERDR_YN"	VARCHAR(1)	DEFAULT "N"	NULL, 
-                           "DGST_YN"	VARCHAR(1)	DEFAULT "N"	NULL, 
-                           "DSPY_YN"	VARCHAR(1)	DEFAULT "N"	NULL, 
-                           "MCHN_YN"	VARCHAR(1)	DEFAULT "N"	NULL, 
-                           "STBLT_YN"	VARCHAR(1)	DEFAULT "N"	NULL, 
-                           "EMRG_GUT_YN"	VARCHAR(1)	DEFAULT "N"	NULL, 
+                           "ERDR_YN"	VARCHAR(1)	DEFAULT 'N'	NULL, 
+                           "DGST_YN"	VARCHAR(1)	DEFAULT 'N'	NULL, 
+                           "DSPY_YN"	VARCHAR(1)	DEFAULT 'N'	NULL, 
+                           "MCHN_YN"	VARCHAR(1)	DEFAULT 'N'	NULL, 
+                           "STBLT_YN"	VARCHAR(1)	DEFAULT 'N'	NULL, 
+                           "EMRG_GUT_YN"	VARCHAR(1)	DEFAULT 'N'	NULL, 
                            "DSPL"	VARCHAR(255)		NULL, 
                            "FUEL_TY"	VARCHAR(255)		NULL, 
                            "VHCL_TY"	VARCHAR(255)		NULL, 
@@ -370,7 +394,9 @@ COMMENT ON COLUMN TIBERO."VEHICLE"."MNFTR_YR" IS '*MANUFACT YEAR / 제조년(연
  
 COMMENT ON COLUMN TIBERO."VEHICLE"."VHCL_CD" IS '*VEHICL CODE / 차명코드'; 
  
---------------------------------------------------------------
+ 
+
+-----------------------------------------CREATE VEHICLE_FILE-----------------------------------------
 CREATE TABLE TIBERO."VEHICLE_FILE" ( 
                                 "ID"	NUMBER(38, 0)		NOT NULL, 
                                 "VHCL_ID"	NUMBER(38, 0)		NOT NULL, 
@@ -397,7 +423,9 @@ COMMENT ON COLUMN TIBERO."VEHICLE_FILE"."EXTN" IS '*EXTENSION / 파일 확장자
  
 COMMENT ON COLUMN TIBERO."VEHICLE_FILE"."ULD_DT" IS '*UPLOAD DATE / 업로드 일시'; 
  
---------------------------------------------------------------
+ 
+
+-----------------------------------------CREATE ADDRESS-----------------------------------------
 CREATE TABLE TIBERO."ADDRESS" ( 
                            "ID"	NUMBER(38, 0)		NOT NULL, 
                            "ADDR_TY"	VARCHAR(255)		NULL, 
@@ -412,7 +440,9 @@ COMMENT ON COLUMN TIBERO."ADDRESS"."ADDR_TY" IS '*ADDR TYPE / 자택, 회사, �
  
 COMMENT ON COLUMN TIBERO."ADDRESS"."ADDR" IS '*ADDRESS / 주소'; 
  
---------------------------------------------------------------
+ 
+
+-----------------------------------------CREATE ADDRESS_MEMBER_REL-----------------------------------------
 CREATE TABLE TIBERO."ADDRESS_MEMBER_REL" ( 
                                       "ID"	NUMBER(38, 0)		NOT NULL, 
                                       "ADDR_ID"	NUMBER(38, 0)		NOT NULL, 
@@ -427,27 +457,430 @@ COMMENT ON COLUMN TIBERO."ADDRESS_MEMBER_REL"."ADDR_ID" IS '*ADDRESS ID / 주소
  
 COMMENT ON COLUMN TIBERO."ADDRESS_MEMBER_REL"."PRCUST_ID" IS '*PERSONAL CUSTOMER ID / 개인고객 ID'; 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."DEPARTMENT" ADD CONSTRAINT "PK_DEPARTMENT" PRIMARY KEY ( 
-                                                                     "ID" 
-    ); 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."JOB_TITLE" ADD CONSTRAINT "PK_JOB_TITLE" PRIMARY KEY ( 
-                                                                   "ID" 
-    ); 
+
+-----------------------------------------CREATE CONTRACT_DESIGN-----------------------------------------
+CREATE TABLE TIBERO."CONTRACT_DESIGN" ( 
+                                   "ID"	NUMBER(38, 0)		NOT NULL, 
+                                   "CUST_ID"	NUMBER(38, 0)		NOT NULL, 
+                                   "NO"	VARCHAR(255)		NULL, 
+                                   "VL"	CLOB		NULL, 
+                                   "DESIGN_STTS"	VARCHAR(255)		NULL, 
+                                   "CREATED_AT"	TIMESTAMP		NULL, 
+                                   "UPDATED_AT"	TIMESTAMP		NULL 
+); 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."JOB_POSITION" ADD CONSTRAINT "PK_JOB_POSITION" PRIMARY KEY ( 
-                                                                         "ID" 
-    ); 
+COMMENT ON COLUMN TIBERO."CONTRACT_DESIGN"."ID" IS 'SEQUENCE'; 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."EMPLOYEE" ADD CONSTRAINT "PK_EMPLOYEE" PRIMARY KEY ( 
-                                                                 "ID" 
-    ); 
+COMMENT ON COLUMN TIBERO."CONTRACT_DESIGN"."CUST_ID" IS '*CUSTOMER ID / 고객 ID'; 
  
---------------------------------------------------------------
+COMMENT ON COLUMN TIBERO."CONTRACT_DESIGN"."NO" IS 'UNIQUE *NUMBER / 설계번호'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_DESIGN"."VL" IS '*VALUE / 설계 JSON'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_DESIGN"."DESIGN_STTS" IS '*DESIGN STATUS / 설계 상태 / 설계중, 보완요청, 심사중, 청약접수'; 
+ 
+ 
+
+-----------------------------------------CREATE CONTRACT_DESIGN_FILE-----------------------------------------
+CREATE TABLE TIBERO."CONTRACT_DESIGN_FILE" ( 
+                                        "ID"	NUMBER(38, 0)		NOT NULL, 
+                                        "CTRT_DESIGN_ID"	NUMBER(38, 0)		NOT NULL, 
+                                        "PATH"	VARCHAR(255)		NULL, 
+                                        "ORGNL_NM"	VARCHAR(255)		NULL, 
+                                        "TY"	VARCHAR(255)		NULL, 
+                                        "EXTN"	VARCHAR(255)		NULL, 
+                                        "ULD_DT"	TIMESTAMP		NULL, 
+                                        "CREATED_AT"	TIMESTAMP		NULL, 
+                                        "UPDATED_AT"	TIMESTAMP		NULL 
+); 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_DESIGN_FILE"."ID" IS 'SEQUENCE'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_DESIGN_FILE"."CTRT_DESIGN_ID" IS '*CONTRACT DESIGN ID / 계약설계 ID'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_DESIGN_FILE"."PATH" IS '*PATH / 저장경로'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_DESIGN_FILE"."ORGNL_NM" IS '*ORIGINAL NAME / 원본이름'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_DESIGN_FILE"."TY" IS '*TYPE / 파일 유형'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_DESIGN_FILE"."EXTN" IS '*EXTENSION / 파일 확장자'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_DESIGN_FILE"."ULD_DT" IS '*UPLOAD DATE / 업로드 일시'; 
+ 
+ 
+
+-----------------------------------------CREATE ADDRESS_CONTRACT_CUSTOMER_REL-----------------------------------------
+CREATE TABLE TIBERO."ADDRESS_CONTRACT_CUSTOMER_REL" ( 
+                                                 "ID"	NUMBER(38, 0)		NOT NULL, 
+                                                 "CTRT_CUST_ID"	NUMBER(38, 0)		NOT NULL, 
+                                                 "ADDR_ID"	NUMBER(38, 0)		NOT NULL, 
+                                                 "CREATED_AT"	TIMESTAMP		NULL, 
+                                                 "UPDATED_AT"	TIMESTAMP		NULL 
+); 
+ 
+COMMENT ON COLUMN TIBERO."ADDRESS_CONTRACT_CUSTOMER_REL"."ID" IS 'SEQUENCE'; 
+ 
+COMMENT ON COLUMN TIBERO."ADDRESS_CONTRACT_CUSTOMER_REL"."CTRT_CUST_ID" IS '*CONTRACT CUSTOMER ID / 계약 고객 ID'; 
+ 
+COMMENT ON COLUMN TIBERO."ADDRESS_CONTRACT_CUSTOMER_REL"."ADDR_ID" IS '*ADDRESS ID / 주소 ID'; 
+ 
+ 
+
+-----------------------------------------CREATE CONTRACT_CUSTOMER_REL-----------------------------------------
+CREATE TABLE TIBERO."CONTRACT_CUSTOMER_REL" ( 
+                                         "ID"	NUMBER(38, 0)		NOT NULL, 
+                                         "CTRT_ID"	NUMBER(38, 0)		NOT NULL, 
+                                         "CUST_ID"	NUMBER(38, 0)		NOT NULL, 
+                                         "TY"	VARCHAR(255)		NULL, 
+                                         "TY_CD"	NUMBER(38, 0)		NULL, 
+                                         "REL"	VARCHAR(255)		NULL, 
+                                         "REL_CD"	NUMBER(38, 0)		NULL, 
+                                         "CREATED_AT"	TIMESTAMP		NULL, 
+                                         "UPDATED_AT"	TIMESTAMP		NULL 
+); 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_CUSTOMER_REL"."ID" IS 'SEQUENCE'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_CUSTOMER_REL"."CTRT_ID" IS '*CONTRACT ID / 꼐약 ID'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_CUSTOMER_REL"."CUST_ID" IS '*CUSTOMER ID / 고객 ID'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_CUSTOMER_REL"."TY" IS '*TYPE / 계약자, 피공제자'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_CUSTOMER_REL"."TY_CD" IS '*TYPE CODE / 유형 코드'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_CUSTOMER_REL"."REL" IS '*RELATION / 본인, 부모, ... (계약자와 관계)'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_CUSTOMER_REL"."REL_CD" IS '*RELATION CODE / 관계 코드'; 
+ 
+ 
+
+-----------------------------------------CREATE CONTRACT_VEHICLE_REL-----------------------------------------
+CREATE TABLE TIBERO."CONTRACT_VEHICLE_REL" ( 
+                                        "ID"	NUMBER(38, 0)		NOT NULL, 
+                                        "CTRT_ID"	NUMBER(38, 0)		NOT NULL, 
+                                        "VHCL_ID"	NUMBER(38, 0)		NOT NULL, 
+                                        "CREATED_AT"	TIMESTAMP		NULL, 
+                                        "UPDATED_AT"	TIMESTAMP		NULL 
+); 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_VEHICLE_REL"."ID" IS 'SEQUENCE'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_VEHICLE_REL"."CTRT_ID" IS '*CONTRACT ID / 계약 ID'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT_VEHICLE_REL"."VHCL_ID" IS '*VEHICLE ID / 차량 ID'; 
+ 
+ 
+
+-----------------------------------------CREATE CONTRACT-----------------------------------------
+CREATE TABLE TIBERO."CONTRACT" ( 
+                            "ID"	NUMBER(38, 0)		NOT NULL, 
+                            "CTRT_NO"	VARCHAR(255)		NULL, 
+                            "CTRT_DT"	TIMESTAMP		NULL, 
+                            "INSRNC_PD"	NUMBER(38, 0)		NULL, 
+                            "INSRNC_BGNG_YMD"	TIMESTAMP		NULL, 
+                            "INSRNC_END_YMD"	TIMESTAMP		NULL, 
+                            "INSRNC_RT"	NUMBER		NULL, 
+                            "DSCNT_EXCG_DGRD"	VARCHAR(255)		NULL, 
+                            "PAY_UNIT"	NUMBER(38, 0)		NULL, 
+                            "TOT_INSRNC_PRMUM"	NUMBER(38, 0)		NULL, 
+                            "INSRNC_PRMUM"	NUMBER(38, 0)		NULL, 
+                            "CTRT_AMT"	NUMBER(38, 0)		NULL, 
+                            "CTRT_AMT_YN"	VARCHAR(1)	DEFAULT 'N'	NULL, 
+                            "ATMC_RENW_YN"	VARCHAR(1)	DEFAULT 'N'	NULL, 
+                            "CTRT_STTS"	VARCHAR(255)		NULL, 
+                            "INSRNC_HIST_GRD"	VARCHAR(255)		NULL, 
+                            "INSRNC_HIST_YN"	VARCHAR(1)	DEFAULT 'N'	NULL, 
+                            "INSRNC_HIST_PD"	NUMBER(38, 0)		NULL, 
+                            "CREATED_AT"	TIMESTAMP		NULL, 
+                            "UPDATED_AT"	TIMESTAMP		NULL 
+); 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."ID" IS 'SEQUENCE'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."CTRT_NO" IS 'UNIQUE *CONTRACT NUMBER / 계약 번호'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."CTRT_DT" IS '*CONTRACT DATE / 계약 일'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."INSRNC_PD" IS '*INSURANCE PERIOD / 보험기간 / MM'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."INSRNC_BGNG_YMD" IS '*INSURANCE BEGINNING YEAR MONTH DATE / 보험(공제) 시작 일자 / YYYYMMDD'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."INSRNC_END_YMD" IS '*INSURANCE END YEAR MONTH DATE / 보험(공제) 종료 일자 / YYYYMMDD'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."INSRNC_RT" IS '*INSURANCE RATE / 요율 / 부동 소수점'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."DSCNT_EXCG_DGRD" IS '*DISCOUNT  EXTRA CHARGE GRADE / 할인할증 등급'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."PAY_UNIT" IS '*PAY UNIT / 납입 단위 / 일시납 = 1, 2회납 = 2, ...'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."TOT_INSRNC_PRMUM" IS '*TOTAL INSURANCE PREMIUM / 총 보험료 / 계약상 발생한 총 보험료'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."INSRNC_PRMUM" IS '*INSURANCE PREMIUM / 실납입 총 보험료'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."CTRT_AMT" IS '*CONTRACT AMOUNT / 가입금'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."CTRT_AMT_YN" IS '*CONTRACT AMOUNT YN / 가입금 납입 여부 / Y , N(DEFAULT)'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."ATMC_RENW_YN" IS '*AUTOMATIC RENEWAL YN / 자동갱신 여부 / Y , N(DEFAULT)'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."CTRT_STTS" IS '*CONTRACT STATUS / 계약 상태 / 정상계약, 해지취소, 만기'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."INSRNC_HIST_GRD" IS '*INSURANCE HISTORY GRADE / 이전 보험 적용 등급'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."INSRNC_HIST_YN" IS '*INSURANCE HISTORY YN / 가입 이력 여부 / Y , N(DEFAULT)'; 
+ 
+COMMENT ON COLUMN TIBERO."CONTRACT"."INSRNC_HIST_PD" IS '*INSURANCE HISTORY PERIOD / 이전 보험 가입 기간'; 
+ 
+ 
+
+-----------------------------------------CREATE ENDORSE-----------------------------------------
+CREATE TABLE TIBERO."ENDORSE" ( 
+                           "ID"	NUMBER(38, 0)		NOT NULL, 
+                           "CTRT_ID"	NUMBER(38, 0)		NOT NULL, 
+                           "NO"	NUMBER(38, 0)		NULL, 
+                           "TY"	VARCHAR(255)		NULL, 
+                           "APLY_DT"	TIMESTAMP		NULL, 
+                           "APLCN_DT"	TIMESTAMP		NULL, 
+                           "EMP_ID"	NUMBER(38, 0)		NULL, 
+                           "EMP_NM"	VARCHAR(255)		NULL, 
+                           "EMP_DEPT"	VARCHAR(255)		NULL, 
+                           "EMP_JBPS"	VARCHAR(255)		NULL, 
+                           "EMP_JBTTL"	VARCHAR(255)		NULL, 
+                           "RMRK"	CLOB		NULL, 
+                           "RVW_STTS"	VARCHAR(255)		NULL, 
+                           "RVW_RSN"	VARCHAR(255)		NULL, 
+                           "CREATED_AT"	TIMESTAMP		NULL, 
+                           "UPDATED_AT"	TIMESTAMP		NULL 
+); 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."ID" IS 'SEQUENCE'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."CTRT_ID" IS '*CONTRACT ID / 계약 ID'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."NO" IS '*NUMBER / 배서 번호'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."TY" IS '*TYPE / 배서 타입 / 취소, 축소, 확대, ..,'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."APLY_DT" IS '*APPLY DATE / 배서 신청 일자'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."APLCN_DT" IS '*APPLICATION DATE / 배서 적용 일자'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."EMP_ID" IS '*EMPLOYEE ID / 담당 직원 ID'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."EMP_NM" IS '*EMPLOYEE  NAME / 담당 직원 이름'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."EMP_DEPT" IS '*EMPLOYEE DEPARTMENT / 담당 직원 부서'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."EMP_JBPS" IS '*EMPLOYEE JOB POSITION / 담당 직원 직책'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."EMP_JBTTL" IS '*EMPLOYEE JOB TITLE / 담당 직원 직책'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."RMRK" IS '*REMARKS / 비고 / 추가 설명을 위한 JSON'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."RVW_STTS" IS '*REVIEW STATUS / 심사 상태 / 심사요청, 심사중. 승인, 반려,...'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE"."RVW_RSN" IS '*REVIEW REASON / 심사 사유'; 
+ 
+ 
+
+-----------------------------------------CREATE ENDORSE_CHANGE-----------------------------------------
+CREATE TABLE TIBERO."ENDORSE_CHANGE" ( 
+                                  "ID"	NUMBER(38, 0)		NOT NULL, 
+                                  "ENDRS_ID"	NUMBER(38, 0)		NOT NULL, 
+                                  "TBL_NM"	VARCHAR(255)		NULL, 
+                                  "COL_NM"	VARCHAR(255)		NULL, 
+                                  "BFR_VL"	VARCHAR(255)		NULL, 
+                                  "AFTR_VL"	VARCHAR(255)		NULL, 
+                                  "CREATED_AT"	DATE		NULL, 
+                                  "UPDATED_AT"	DATE		NULL 
+); 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE_CHANGE"."ID" IS 'SEQUENCE'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE_CHANGE"."ENDRS_ID" IS '*ENDORSE ID / 배서 ID'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE_CHANGE"."TBL_NM" IS '*TABLE NAME / 변경 테이블 명'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE_CHANGE"."COL_NM" IS '*COLUMN NAME / 변경 컬럼 명'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE_CHANGE"."BFR_VL" IS '*BEFORE VALUE / 배서 전 값'; 
+ 
+COMMENT ON COLUMN TIBERO."ENDORSE_CHANGE"."AFTR_VL" IS '*AFTER VALUE / 배서 후 값'; 
+ 
+ 
+
+-----------------------------------------CREATE INSURANCE_HISTORY-----------------------------------------
+CREATE TABLE TIBERO."INSURANCE_HISTORY" ( 
+                                     "ID"	NUMBER(38, 0)		NOT NULL, 
+                                     "CTRT_ID"	NUMBER(38, 0)		NOT NULL, 
+                                     "INSRNC_PD"	NUMBER(38, 0)		NULL, 
+                                     "INSRNC_BGNG_YMD"	TIMESTAMP		NULL, 
+                                     "INSRNC_END_YMD"	TIMESTAMP		NULL, 
+                                     "GRD"	VARCHAR(255)		NULL, 
+                                     "GRD_DOC_PATH"	VARCHAR(255)		NULL, 
+                                     "GRD_DOC_ORGNL_NM"	VARCHAR(255)		NULL, 
+                                     "GRD_DOC_EXTN"	VARCHAR(255)		NULL, 
+                                     "GRD_DOC_ULD_DT"	TIMESTAMP		NULL, 
+                                     "CREATED_AT"	TIMESTAMP		NULL, 
+                                     "UPDATED_AT"	TIMESTAMP		NULL 
+); 
+ 
+COMMENT ON COLUMN TIBERO."INSURANCE_HISTORY"."ID" IS 'SEQUENCE'; 
+ 
+COMMENT ON COLUMN TIBERO."INSURANCE_HISTORY"."CTRT_ID" IS '*CONTRACT ID / 계약 ID'; 
+ 
+COMMENT ON COLUMN TIBERO."INSURANCE_HISTORY"."INSRNC_PD" IS '*INSURANCE PERIOD / 보험가입 기간 / MM'; 
+ 
+COMMENT ON COLUMN TIBERO."INSURANCE_HISTORY"."INSRNC_BGNG_YMD" IS '*INSURANCE BEGINNING YEAR MONTH DAY / 이전 보험 시작 일자 / YYYYMMDD'; 
+ 
+COMMENT ON COLUMN TIBERO."INSURANCE_HISTORY"."INSRNC_END_YMD" IS '*INSURANCE END YEAR MONTH DAY / 이전 보험 종료 일자 / YYYYMMDD'; 
+ 
+COMMENT ON COLUMN TIBERO."INSURANCE_HISTORY"."GRD" IS '*GRADE / 이전 보험 할인할증 등급'; 
+ 
+COMMENT ON COLUMN TIBERO."INSURANCE_HISTORY"."GRD_DOC_PATH" IS '*GRADE DOCUMENT / 적용등급확인서 저장 URL'; 
+ 
+COMMENT ON COLUMN TIBERO."INSURANCE_HISTORY"."GRD_DOC_ORGNL_NM" IS '*GRADE DOCUMENT ORIGINAL NAME / 적용등급확인서 원본 이름'; 
+ 
+COMMENT ON COLUMN TIBERO."INSURANCE_HISTORY"."GRD_DOC_EXTN" IS '*GRADE DOCUMENT EXTENSION / 적용등급확인서 파일 확장자'; 
+ 
+COMMENT ON COLUMN TIBERO."INSURANCE_HISTORY"."GRD_DOC_ULD_DT" IS '*GRADE DOCUMENT UPLOAD DATE / 적용등급확인서 업로드 일시'; 
+ 
+ 
+-----------------------------------------DEPARTMENT PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."DEPARTMENT" ADD CONSTRAINT "PK_DEPARTMENT" PRIMARY KEY (
+                                                                     "ID"
+    );
+
+-----------------------------------------JOB_TITLE PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."JOB_TITLE" ADD CONSTRAINT "PK_JOB_TITLE" PRIMARY KEY (
+                                                                   "ID"
+    );
+
+-----------------------------------------JOB_POSITION PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."JOB_POSITION" ADD CONSTRAINT "PK_JOB_POSITION" PRIMARY KEY (
+                                                                         "ID"
+    );
+
+-----------------------------------------EMPLOYEE PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."EMPLOYEE" ADD CONSTRAINT "PK_EMPLOYEE" PRIMARY KEY (
+                                                                 "ID"
+    );
+
+-----------------------------------------UNION_EMPLOYEE_REL PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."UNION_EMPLOYEE_REL" ADD CONSTRAINT "PK_UNION_EMPLOYEE_REL" PRIMARY KEY (
+                                                                                     "ID"
+    );
+
+-----------------------------------------CUSTOMER PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CUSTOMER" ADD CONSTRAINT "PK_CUSTOMER" PRIMARY KEY (
+                                                                 "ID"
+    );
+
+-----------------------------------------PERSONAL_CUSTOMER PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."PERSONAL_CUSTOMER" ADD CONSTRAINT "PK_PERSONAL_CUSTOMER" PRIMARY KEY (
+                                                                                   "ID"
+    );
+
+-----------------------------------------UNION PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."UNION" ADD CONSTRAINT "PK_UNION" PRIMARY KEY (
+                                                           "ID"
+    );
+
+-----------------------------------------RIDER_UNION_REL PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."RIDER_UNION_REL" ADD CONSTRAINT "PK_RIDER_UNION_REL" PRIMARY KEY (
+                                                                               "ID"
+    );
+
+-----------------------------------------RIDER PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."RIDER" ADD CONSTRAINT "PK_RIDER" PRIMARY KEY (
+                                                           "ID"
+    );
+
+-----------------------------------------DISCUSSION PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."DISCUSSION" ADD CONSTRAINT "PK_DISCUSSION" PRIMARY KEY (
+                                                                     "ID"
+    );
+
+-----------------------------------------TERMS PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."TERMS" ADD CONSTRAINT "PK_TERMS" PRIMARY KEY (
+                                                           "ID"
+    );
+
+-----------------------------------------CUSTOMER_TERMS_REL PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CUSTOMER_TERMS_REL" ADD CONSTRAINT "PK_CUSTOMER_TERMS_REL" PRIMARY KEY (
+                                                                                     "ID"
+    );
+
+-----------------------------------------VEHICLE PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."VEHICLE" ADD CONSTRAINT "PK_VEHICLE" PRIMARY KEY (
+                                                               "ID"
+    );
+
+-----------------------------------------VEHICLE_FILE PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."VEHICLE_FILE" ADD CONSTRAINT "PK_VEHICLE_FILE" PRIMARY KEY (
+                                                                         "ID"
+    );
+
+-----------------------------------------ADDRESS PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."ADDRESS" ADD CONSTRAINT "PK_ADDRESS" PRIMARY KEY (
+                                                               "ID"
+    );
+
+-----------------------------------------ADDRESS_MEMBER_REL PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."ADDRESS_MEMBER_REL" ADD CONSTRAINT "PK_ADDRESS_MEMBER_REL" PRIMARY KEY (
+                                                                                     "ID"
+    );
+
+-----------------------------------------CONTRACT_DESIGN PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CONTRACT_DESIGN" ADD CONSTRAINT "PK_CONTRACT_DESIGN" PRIMARY KEY (
+                                                                               "ID"
+    );
+
+-----------------------------------------CONTRACT_DESIGN_FILE PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CONTRACT_DESIGN_FILE" ADD CONSTRAINT "PK_CONTRACT_DESIGN_FILE" PRIMARY KEY (
+                                                                                         "ID"
+    );
+
+-----------------------------------------ADDRESS_CONTRACT_CUSTOMER_REL PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."ADDRESS_CONTRACT_CUSTOMER_REL" ADD CONSTRAINT "PK_ADDRESS_CONTRACT_CUSTOMER_REL" PRIMARY KEY (
+                                                                                                           "ID"
+    );
+
+-----------------------------------------CONTRACT_CUSTOMER_REL PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CONTRACT_CUSTOMER_REL" ADD CONSTRAINT "PK_CONTRACT_CUSTOMER_REL" PRIMARY KEY (
+                                                                                           "ID"
+    );
+
+-----------------------------------------CONTRACT_VEHICLE_REL PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CONTRACT_VEHICLE_REL" ADD CONSTRAINT "PK_CONTRACT_VEHICLE_REL" PRIMARY KEY (
+                                                                                         "ID"
+    );
+
+-----------------------------------------CONTRACT PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CONTRACT" ADD CONSTRAINT "PK_CONTRACT" PRIMARY KEY (
+                                                                 "ID"
+    );
+
+-----------------------------------------ENDORSE PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."ENDORSE" ADD CONSTRAINT "PK_ENDORSE" PRIMARY KEY (
+                                                               "ID"
+    );
+
+-----------------------------------------ENDORSE_CHANGE PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."ENDORSE_CHANGE" ADD CONSTRAINT "PK_ENDORSE_CHANGE" PRIMARY KEY (
+                                                                             "ID"
+    );
+
+-----------------------------------------INSURANCE_HISTORY PK SETTING-----------------------------------------
+ALTER TABLE TIBERO."INSURANCE_HISTORY" ADD CONSTRAINT "PK_INSURANCE_HISTORY" PRIMARY KEY (
+                                                                                   "ID"
+    );
+
+
+-----------------------------------------EMPLOYEE FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."EMPLOYEE" ADD CONSTRAINT "FK_DEPARTMENT_TO_EMPLOYEE_1" FOREIGN KEY ( 
                                                                                  "DEPT_ID" 
     ) 
@@ -455,7 +888,8 @@ ALTER TABLE TIBERO."EMPLOYEE" ADD CONSTRAINT "FK_DEPARTMENT_TO_EMPLOYEE_1" FOREI
                              "ID" 
         ); 
  
---------------------------------------------------------------
+
+-----------------------------------------EMPLOYEE FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."EMPLOYEE" ADD CONSTRAINT "FK_JOB_POSITION_TO_EMPLOYEE_1" FOREIGN KEY ( 
                                                                                    "JBPS_ID" 
     ) 
@@ -463,7 +897,8 @@ ALTER TABLE TIBERO."EMPLOYEE" ADD CONSTRAINT "FK_JOB_POSITION_TO_EMPLOYEE_1" FOR
                                "ID" 
         ); 
  
---------------------------------------------------------------
+
+-----------------------------------------EMPLOYEE FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."EMPLOYEE" ADD CONSTRAINT "FK_JOB_TITLE_TO_EMPLOYEE_1" FOREIGN KEY ( 
                                                                                 "JBTTL_ID" 
     ) 
@@ -471,12 +906,8 @@ ALTER TABLE TIBERO."EMPLOYEE" ADD CONSTRAINT "FK_JOB_TITLE_TO_EMPLOYEE_1" FOREIG
                             "ID" 
         ); 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."UNION_EMPLOYEE_REL" ADD CONSTRAINT "PK_UNION_EMPLOYEE_REL" PRIMARY KEY ( 
-                                                                                     "ID" 
-    ); 
- 
---------------------------------------------------------------
+
+-----------------------------------------UNION_EMPLOYEE_REL FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."UNION_EMPLOYEE_REL" ADD CONSTRAINT "FK_UNION_TO_UNION_EMPLOYEE_REL_1" FOREIGN KEY ( 
                                                                                                 "UNION_ID" 
     ) 
@@ -484,7 +915,8 @@ ALTER TABLE TIBERO."UNION_EMPLOYEE_REL" ADD CONSTRAINT "FK_UNION_TO_UNION_EMPLOY
                         "ID" 
         ); 
  
---------------------------------------------------------------
+
+-----------------------------------------UNION_EMPLOYEE_REL FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."UNION_EMPLOYEE_REL" ADD CONSTRAINT "FK_EMPLOYEE_TO_UNION_EMPLOYEE_REL_1" FOREIGN KEY ( 
                                                                                                    "EMP_ID" 
     ) 
@@ -492,32 +924,8 @@ ALTER TABLE TIBERO."UNION_EMPLOYEE_REL" ADD CONSTRAINT "FK_EMPLOYEE_TO_UNION_EMP
                            "ID" 
         ); 
  
--- 고객 Table 
- 
---------------------------------------------------------------
-ALTER TABLE TIBERO."CUSTOMER" ADD CONSTRAINT "PK_CUSTOMER" PRIMARY KEY ( 
-                                                                 "ID" 
-    ); 
- 
---------------------------------------------------------------
-ALTER TABLE TIBERO."UNION" ADD CONSTRAINT "PK_UNION" PRIMARY KEY ( 
-                                                           "ID" 
-    ); 
- 
---------------------------------------------------------------
-ALTER TABLE TIBERO."UNION" ADD CONSTRAINT "FK_CUSTOMER_TO_UNION_1" FOREIGN KEY ( 
-                                                                         "CUST_ID" 
-    ) 
-    REFERENCES TIBERO."CUSTOMER" ( 
-                           "ID" 
-        ); 
- 
---------------------------------------------------------------
-ALTER TABLE TIBERO."PERSONAL_CUSTOMER" ADD CONSTRAINT "PK_PERSONAL_CUSTOMER" PRIMARY KEY ( 
-                                                                                   "ID" 
-    ); 
- 
---------------------------------------------------------------
+
+-----------------------------------------PERSONAL_CUSTOMER FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."PERSONAL_CUSTOMER" ADD CONSTRAINT "FK_CUSTOMER_TO_PERSONAL_CUSTOMER_1" FOREIGN KEY ( 
                                                                                                  "CUST_ID" 
     ) 
@@ -525,25 +933,17 @@ ALTER TABLE TIBERO."PERSONAL_CUSTOMER" ADD CONSTRAINT "FK_CUSTOMER_TO_PERSONAL_C
                            "ID" 
         ); 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."RIDER" ADD CONSTRAINT "PK_RIDER" PRIMARY KEY ( 
-                                                           "ID" 
-    ); 
- 
---------------------------------------------------------------
-ALTER TABLE TIBERO."RIDER" ADD CONSTRAINT "FK_PERSONAL_CUSTOMER_TO_RIDER_1" FOREIGN KEY ( 
-                                                                                  "PRCUST_ID" 
+
+-----------------------------------------UNION FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."UNION" ADD CONSTRAINT "FK_CUSTOMER_TO_UNION_1" FOREIGN KEY ( 
+                                                                         "CUST_ID" 
     ) 
-    REFERENCES TIBERO."PERSONAL_CUSTOMER" ( 
-                                    "ID" 
+    REFERENCES TIBERO."CUSTOMER" ( 
+                           "ID" 
         ); 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."RIDER_UNION_REL" ADD CONSTRAINT "PK_RIDER_UNION_REL" PRIMARY KEY ( 
-                                                                               "ID" 
-    ); 
- 
---------------------------------------------------------------
+
+-----------------------------------------RIDER_UNION_REL FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."RIDER_UNION_REL" ADD CONSTRAINT "FK_UNION_TO_RIDER_UNION_REL_1" FOREIGN KEY ( 
                                                                                           "UNION_ID" 
     ) 
@@ -551,7 +951,8 @@ ALTER TABLE TIBERO."RIDER_UNION_REL" ADD CONSTRAINT "FK_UNION_TO_RIDER_UNION_REL
                         "ID" 
         ); 
  
---------------------------------------------------------------
+
+-----------------------------------------RIDER_UNION_REL FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."RIDER_UNION_REL" ADD CONSTRAINT "FK_RIDER_TO_RIDER_UNION_REL_1" FOREIGN KEY ( 
                                                                                           "RIDER_ID" 
     ) 
@@ -559,38 +960,18 @@ ALTER TABLE TIBERO."RIDER_UNION_REL" ADD CONSTRAINT "FK_RIDER_TO_RIDER_UNION_REL
                         "ID" 
         ); 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."TERMS" ADD CONSTRAINT "PK_TERMS" PRIMARY KEY ( 
-                                                           "ID" 
-    ); 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."CUSTOMER_TERMS_REL" ADD CONSTRAINT "PK_CUSTOMER_TERMS_REL" PRIMARY KEY ( 
-                                                                                     "ID" 
-    ); 
- 
---------------------------------------------------------------
-ALTER TABLE TIBERO."CUSTOMER_TERMS_REL" ADD CONSTRAINT "FK_CUSTOMER_TO_CUSTOMER_TERMS_REL_1" FOREIGN KEY ( 
-                                                                                                   "CUST_ID" 
+
+-----------------------------------------RIDER FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."RIDER" ADD CONSTRAINT "FK_PERSONAL_CUSTOMER_TO_RIDER_1" FOREIGN KEY ( 
+                                                                                  "PRCUST_ID" 
     ) 
-    REFERENCES TIBERO."CUSTOMER" ( 
-                           "ID" 
+    REFERENCES TIBERO."PERSONAL_CUSTOMER" ( 
+                                    "ID" 
         ); 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."CUSTOMER_TERMS_REL" ADD CONSTRAINT "FK_TERMS_TO_CUSTOMER_TERMS_REL_1" FOREIGN KEY ( 
-                                                                                                "TERMS_ID" 
-    ) 
-    REFERENCES TIBERO."TERMS" ( 
-                        "ID" 
-        ); 
- 
---------------------------------------------------------------
-ALTER TABLE TIBERO."DISCUSSION" ADD CONSTRAINT "PK_DISCUSSION" PRIMARY KEY ( 
-                                                                     "ID" 
-    ); 
- 
---------------------------------------------------------------
+
+-----------------------------------------DISCUSSION FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."DISCUSSION" ADD CONSTRAINT "FK_CUSTOMER_TO_DISCUSSION_1" FOREIGN KEY ( 
                                                                                    "CUST_ID" 
     ) 
@@ -598,12 +979,26 @@ ALTER TABLE TIBERO."DISCUSSION" ADD CONSTRAINT "FK_CUSTOMER_TO_DISCUSSION_1" FOR
                            "ID" 
         ); 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."VEHICLE" ADD CONSTRAINT "PK_VEHICLE" PRIMARY KEY ( 
-                                                               "ID" 
-    ); 
+
+-----------------------------------------CUSTOMER_TERMS_REL FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CUSTOMER_TERMS_REL" ADD CONSTRAINT "FK_CUSTOMER_TO_CUSTOMER_TERMS_REL_1" FOREIGN KEY ( 
+                                                                                                   "CUST_ID" 
+    ) 
+    REFERENCES TIBERO."CUSTOMER" ( 
+                           "ID" 
+        ); 
  
---------------------------------------------------------------
+
+-----------------------------------------CUSTOMER_TERMS_REL FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CUSTOMER_TERMS_REL" ADD CONSTRAINT "FK_TERMS_TO_CUSTOMER_TERMS_REL_1" FOREIGN KEY ( 
+                                                                                                "TERMS_ID" 
+    ) 
+    REFERENCES TIBERO."TERMS" ( 
+                        "ID" 
+        ); 
+ 
+
+-----------------------------------------VEHICLE FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."VEHICLE" ADD CONSTRAINT "FK_CUSTOMER_TO_VEHICLE_1" FOREIGN KEY ( 
                                                                              "CUST_ID" 
     ) 
@@ -611,12 +1006,8 @@ ALTER TABLE TIBERO."VEHICLE" ADD CONSTRAINT "FK_CUSTOMER_TO_VEHICLE_1" FOREIGN K
                            "ID" 
         ); 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."VEHICLE_FILE" ADD CONSTRAINT "PK_VEHICLE_FILE" PRIMARY KEY ( 
-                                                                         "ID" 
-    ); 
- 
---------------------------------------------------------------
+
+-----------------------------------------VEHICLE_FILE FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."VEHICLE_FILE" ADD CONSTRAINT "FK_VEHICLE_TO_VEHICLE_FILE_1" FOREIGN KEY ( 
                                                                                       "VHCL_ID" 
     ) 
@@ -624,17 +1015,8 @@ ALTER TABLE TIBERO."VEHICLE_FILE" ADD CONSTRAINT "FK_VEHICLE_TO_VEHICLE_FILE_1" 
                           "ID" 
         ); 
  
---------------------------------------------------------------
-ALTER TABLE TIBERO."ADDRESS" ADD CONSTRAINT "PK_ADDRESS" PRIMARY KEY ( 
-                                                               "ID" 
-    ); 
- 
---------------------------------------------------------------
-ALTER TABLE TIBERO."ADDRESS_MEMBER_REL" ADD CONSTRAINT "PK_ADDRESS_MEMBER_REL" PRIMARY KEY ( 
-                                                                                     "ID" 
-    ); 
- 
---------------------------------------------------------------
+
+-----------------------------------------ADDRESS_MEMBER_REL FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."ADDRESS_MEMBER_REL" ADD CONSTRAINT "FK_ADDRESS_TO_ADDRESS_MEMBER_REL_1" FOREIGN KEY ( 
                                                                                                   "ADDR_ID" 
     ) 
@@ -642,7 +1024,8 @@ ALTER TABLE TIBERO."ADDRESS_MEMBER_REL" ADD CONSTRAINT "FK_ADDRESS_TO_ADDRESS_ME
                           "ID" 
         ); 
  
---------------------------------------------------------------
+
+-----------------------------------------ADDRESS_MEMBER_REL FK SETTING-----------------------------------------
 ALTER TABLE TIBERO."ADDRESS_MEMBER_REL" ADD CONSTRAINT "FK_PERSONAL_CUSTOMER_TO_ADDRESS_MEMBER_REL_1" FOREIGN KEY ( 
                                                                                                             "PRCUST_ID" 
     ) 
@@ -650,21 +1033,130 @@ ALTER TABLE TIBERO."ADDRESS_MEMBER_REL" ADD CONSTRAINT "FK_PERSONAL_CUSTOMER_TO_
                                     "ID" 
         ); 
  
+
+-----------------------------------------CONTRACT_DESIGN FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CONTRACT_DESIGN" ADD CONSTRAINT "FK_CUSTOMER_TO_CONTRACT_DESIGN_1" FOREIGN KEY ( 
+                                                                                             "CUST_ID" 
+    ) 
+    REFERENCES TIBERO."CUSTOMER" ( 
+                           "ID" 
+        ); 
  
+
+-----------------------------------------CONTRACT_DESIGN_FILE FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CONTRACT_DESIGN_FILE" ADD CONSTRAINT "FK_CONTRACT_DESIGN_TO_CONTRACT_DESIGN_FILE_1" FOREIGN KEY ( 
+                                                                                                              "CTRT_DESIGN_ID" 
+    ) 
+    REFERENCES TIBERO."CONTRACT_DESIGN" ( 
+                                  "ID" 
+        ); 
+ 
+
+-----------------------------------------ADDRESS_CONTRACT_CUSTOMER_REL FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."ADDRESS_CONTRACT_CUSTOMER_REL" ADD CONSTRAINT "FK_CONTRACT_CUSTOMER_REL_TO_ADDRESS_CONTRACT_CUSTOMER_REL_1" FOREIGN KEY ( 
+                                                                                                                                      "CTRT_CUST_ID" 
+    ) 
+    REFERENCES TIBERO."CONTRACT_CUSTOMER_REL" ( 
+                                        "ID" 
+        ); 
+ 
+
+-----------------------------------------ADDRESS_CONTRACT_CUSTOMER_REL FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."ADDRESS_CONTRACT_CUSTOMER_REL" ADD CONSTRAINT "FK_ADDRESS_TO_ADDRESS_CONTRACT_CUSTOMER_REL_1" FOREIGN KEY ( 
+                                                                                                                        "ADDR_ID" 
+    ) 
+    REFERENCES TIBERO."ADDRESS" ( 
+                          "ID" 
+        ); 
+ 
+
+-----------------------------------------CONTRACT_CUSTOMER_REL FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CONTRACT_CUSTOMER_REL" ADD CONSTRAINT "FK_CONTRACT_TO_CONTRACT_CUSTOMER_REL_1" FOREIGN KEY ( 
+                                                                                                         "CTRT_ID" 
+    ) 
+    REFERENCES TIBERO."CONTRACT" ( 
+                           "ID" 
+        ); 
+ 
+
+-----------------------------------------CONTRACT_CUSTOMER_REL FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CONTRACT_CUSTOMER_REL" ADD CONSTRAINT "FK_CUSTOMER_TO_CONTRACT_CUSTOMER_REL_1" FOREIGN KEY ( 
+                                                                                                         "CUST_ID" 
+    ) 
+    REFERENCES TIBERO."CUSTOMER" ( 
+                           "ID" 
+        ); 
+ 
+
+-----------------------------------------CONTRACT_VEHICLE_REL FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CONTRACT_VEHICLE_REL" ADD CONSTRAINT "FK_CONTRACT_TO_CONTRACT_VEHICLE_REL_1" FOREIGN KEY ( 
+                                                                                                       "CTRT_ID" 
+    ) 
+    REFERENCES TIBERO."CONTRACT" ( 
+                           "ID" 
+        ); 
+ 
+
+-----------------------------------------CONTRACT_VEHICLE_REL FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."CONTRACT_VEHICLE_REL" ADD CONSTRAINT "FK_VEHICLE_TO_CONTRACT_VEHICLE_REL_1" FOREIGN KEY ( 
+                                                                                                      "VHCL_ID" 
+    ) 
+    REFERENCES TIBERO."VEHICLE" ( 
+                          "ID" 
+        ); 
+ 
+
+-----------------------------------------ENDORSE FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."ENDORSE" ADD CONSTRAINT "FK_CONTRACT_TO_ENDORSE_1" FOREIGN KEY ( 
+                                                                             "CTRT_ID" 
+    ) 
+    REFERENCES TIBERO."CONTRACT" ( 
+                           "ID" 
+        ); 
+ 
+
+-----------------------------------------ENDORSE_CHANGE FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."ENDORSE_CHANGE" ADD CONSTRAINT "FK_ENDORSE_TO_ENDORSE_CHANGE_1" FOREIGN KEY ( 
+                                                                                          "ENDRS_ID" 
+    ) 
+    REFERENCES TIBERO."ENDORSE" ( 
+                          "ID" 
+        ); 
+ 
+
+-----------------------------------------INSURANCE_HISTORY FK SETTING-----------------------------------------
+ALTER TABLE TIBERO."INSURANCE_HISTORY" ADD CONSTRAINT "FK_CONTRACT_TO_INSURANCE_HISTORY_1" FOREIGN KEY ( 
+                                                                                                 "CTRT_ID" 
+    ) 
+    REFERENCES TIBERO."CONTRACT" ( 
+                           "ID" 
+        ); 
+ 
+-----------------------------------------SEQUENCE SETTING -----------------------------------------
+
 CREATE SEQUENCE TIBERO."DEPARTMENT_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."JOB_TITLE_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."JOB_POSITION_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."EMPLOYEE_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."UNION_EMPLOYEE_REL_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."CUSTOMER_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
-CREATE SEQUENCE TIBERO."UNION_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."PERSONAL_CUSTOMER_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
-CREATE SEQUENCE TIBERO."RIDER_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
+CREATE SEQUENCE TIBERO."UNION_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."RIDER_UNION_REL_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
+CREATE SEQUENCE TIBERO."RIDER_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
+CREATE SEQUENCE TIBERO."DISCUSSION_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."TERMS_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."CUSTOMER_TERMS_REL_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
-CREATE SEQUENCE TIBERO."DISCUSSION_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."VEHICLE_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."VEHICLE_FILE_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."ADDRESS_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
 CREATE SEQUENCE TIBERO."ADDRESS_MEMBER_REL_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
+CREATE SEQUENCE TIBERO."CONTRACT_DESIGN_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
+CREATE SEQUENCE TIBERO."CONTRACT_DESIGN_FILE_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
+CREATE SEQUENCE TIBERO."ADDRESS_CONTRACT_CUSTOMER_REL_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
+CREATE SEQUENCE TIBERO."CONTRACT_CUSTOMER_REL_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
+CREATE SEQUENCE TIBERO."CONTRACT_VEHICLE_REL_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
+CREATE SEQUENCE TIBERO."CONTRACT_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
+CREATE SEQUENCE TIBERO."ENDORSE_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
+CREATE SEQUENCE TIBERO."ENDORSE_CHANGE_SEQ" INCREMENT BY 1 START WITH 1 ORDER;
+CREATE SEQUENCE TIBERO."INSURANCE_HISTORY_SEQ" INCREMENT BY 1 START WITH 1 ORDER;

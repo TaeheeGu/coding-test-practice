@@ -25,8 +25,10 @@ public class Main {
 
             String alter = "";
             String create = "";
+            String pk = "";
 
             boolean plag = false;
+            int pkPlag = 0;
 
             // 1. 파일 객체 생성
             File newFile = new File("newDDL.txt");
@@ -44,6 +46,28 @@ public class Main {
                 String alterTemp = "";
                 String createTemp = "";
 
+                if(line.contains("PRIMARY KEY")){
+                    String pkTemp = "";
+
+                    String[] split = line.split(" ");
+                    for(int i = 0; i < split.length; i++) {
+                        // ALTER TABLE
+                        if(split[i].equals("ALTER") && split[i+1].equals("TABLE")){
+                            split[i+2] = "TIBERO." + split[i+2];
+
+                        }
+                    }
+
+                    pkTemp += "\n-----------------------------------------" + tableName + " PK SETTING" + "-----------------------------------------\n";
+                    pkTemp += String.join(" ", split);
+                    pkTemp += "\n" + bufReader.readLine();
+                    pkTemp += "\n" + bufReader.readLine() + "\n";
+                    pk += pkTemp;
+
+                    continue;
+                }
+
+
                 String[] split = line.split(" ");
                 for(int i = 0; i < split.length; i++) {
 
@@ -52,7 +76,7 @@ public class Main {
                         tableName = split[i+2].substring(1, split[i+2].length()-1);
                         split[i+2] = "TIBERO." + split[i+2];
 
-                        createTemp += "--------------------------------------------------------------\n";
+                        createTemp += "\n-----------------------------------------" + "CREATE " + tableName + "-----------------------------------------\n";
                         alterTemp = "";
                         plag = false;
                     }
@@ -65,7 +89,7 @@ public class Main {
                     if(split[i].equals("ALTER")) {
                         createTemp = "";
                         plag = true;
-                        alterTemp += "--------------------------------------------------------------\n";
+                        alterTemp += "\n-----------------------------------------" + tableName + " FK SETTING" + "-----------------------------------------\n";
                     }
 
                     // ALTER TABLE
@@ -105,8 +129,12 @@ public class Main {
             }
 
             ddl += create;
+            ddl += pk;
             ddl += alter;
+            ddl += "\n-----------------------------------------" + "SEQUENCE SETTING " + "-----------------------------------------\n";
             ddl += seq;
+
+            System.out.println("+++++++++++++++++++++++++++");
             System.out.println(ddl);
 
 
