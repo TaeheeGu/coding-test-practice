@@ -27,6 +27,10 @@ public class Main {
             String create = "";
             String pk = "";
 
+            String updatedAtTrigger = "-----------------------------------------" + "UPDATED_AT TRIGGER" + "-----------------------------------------\n";
+
+            String commonColumn = "\n\n\n-----------------------------------------" + "ADD COMMON COLUMN" +  "-----------------------------------------\n";;
+
             String tempTableName = "-2";
 
             String tableComment = "\n\n\n-----------------------------------------" + "TABLE COMMENT" + "-----------------------------------------\n";
@@ -37,14 +41,23 @@ public class Main {
             // 1. 파일 객체 생성
             File newFile = new File("ddl.sql");
 
+            File newTriggerFile = new File("trigger.sql");
+
             // 2. 파일 존재여부 체크 및 생성
             if (!newFile.exists()) {
                 newFile.createNewFile();
             }
 
+            if (!newTriggerFile.exists()) {
+                newTriggerFile.createNewFile();
+            }
+
             // 3. Buffer를 사용해서 File에 write할 수 있는 BufferedWriter 생성
             FileWriter fw = new FileWriter(newFile);
             BufferedWriter writer = new BufferedWriter(fw);
+
+            FileWriter triggerFw = new FileWriter(newTriggerFile);
+            BufferedWriter triggerWriter = new BufferedWriter(triggerFw);
 
             while((line = bufReader.readLine()) != null){
                 String alterTemp = "";
@@ -93,6 +106,31 @@ public class Main {
                     if(!tempTableName.equals(tableName) && !tempTableName.equals("-2")) {
                         tableComment += "\nCOMMENT ON TABLE FINTECH.\"" +  tempTableName + "\" IS \'TABLE COMMENT 작성\';";
                         tableName = tempTableName;
+
+                        commonColumn += "\nALTER TABLE FINTECH.\"" + tempTableName + "\" ADD CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Seoul';";
+                        commonColumn += "\nALTER TABLE FINTECH.\"" + tempTableName + "\" ADD UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Seoul';\n";
+
+
+                        File updateTriggerFile = new File(tempTableName + "_updated_at_trigger.sql");
+                        if (!updateTriggerFile.exists()) {
+                            updateTriggerFile.createNewFile();
+                        }
+                        FileWriter updateTriggerFW = new FileWriter(updateTriggerFile);
+                        BufferedWriter updateTriggerWriter = new BufferedWriter(updateTriggerFW);
+
+                        String tempUpdatedAtTrigger = "\nCREATE TRIGGER FINTECH."+  tempTableName + "_UPDATED_AT_TRIGGER\n"
+                            + "BEFORE UPDATE ON FINTECH." + tempTableName + "\n"
+                            + "    FOR EACH ROW\n"
+                            + "BEGIN\n"
+                            + "    :NEW.UPDATED_AT := CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Seoul';\n"
+                            + "END;\n";
+
+                        updatedAtTrigger += tempUpdatedAtTrigger;
+                        updateTriggerWriter.write(tempUpdatedAtTrigger);
+                        // 5. BufferedWriter close
+                        updateTriggerWriter.close();
+
+
                     }
 
                     // COMMENT FINTECH 명시
@@ -146,15 +184,20 @@ public class Main {
             ddl += alter;
             ddl += "\n-----------------------------------------" + "SEQUENCE SETTING " + "-----------------------------------------\n";
             ddl += seq;
+            ddl += commonColumn;
             ddl += tableComment;
 
             System.out.println(ddl);
 
 
+
+
             // 4. 파일에 쓰기
             writer.write(ddl);
+            triggerWriter.write(updatedAtTrigger);
             // 5. BufferedWriter close
             writer.close();
+            triggerWriter.close();
 
 
             bufReader.close();
